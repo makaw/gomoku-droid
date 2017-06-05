@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="btn_gray_bg_start">#c0c0c0</color>
+    <color name="btn_gray_bg_end">#cacaca</color>
+    <color name="btn_gray_border">#a0a0a0</color>
+
+</resources>
