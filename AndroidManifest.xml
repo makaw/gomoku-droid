@@ -25,6 +25,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.GameActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+            android:launchMode="singleTop" />        
+        <activity
             android:name=".activities.AboutActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:launchMode="singleTop" />

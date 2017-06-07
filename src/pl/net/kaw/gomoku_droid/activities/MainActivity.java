@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
@@ -28,10 +27,6 @@ import pl.net.kaw.gomoku_droid.R;
 public class MainActivity extends AppActivity {
 
 	
-	private DisplayMetrics mMetrics = new DisplayMetrics();
-	//private float mScreenDensity;
-
-
 	/** Animacja po kliknięciu przycisku */
 	private static AlphaAnimation BUTTON_CLICK = new AlphaAnimation(1F, 0.7F);	
 	
@@ -40,13 +35,10 @@ public class MainActivity extends AppActivity {
 		
 	  super.onCreate(savedInstanceState);		
 	  	 
-	  getWindowManager().getDefaultDisplay().getMetrics(mMetrics);
-	 // mScreenDensity = mMetrics.density;
-	    
 	  setContentView(R.layout.main_activity);
 	  
 	  Typeface font = Typeface.createFromAsset(getAssets(),"fonts/vertiup2.ttf");
-	  TextView startItem = (TextView) findViewById(R.id.start_item);
+	  final TextView startItem = (TextView) findViewById(R.id.start_item);
 	  startItem.setTypeface(font);
 	  final TextView aboutItem = (TextView) findViewById(R.id.about_item);
 	  aboutItem.setTypeface(font);
@@ -54,6 +46,20 @@ public class MainActivity extends AppActivity {
 	  settingsItem.setTypeface(font);
 	  final TextView exitItem = (TextView) findViewById(R.id.exit_item);
 	  exitItem.setTypeface(font);	
+	  
+	  
+	  startItem.setOnClickListener(new View.OnClickListener() {
+			
+		  @Override
+		  public void onClick(View view) {
+			  
+			  startItem.startAnimation(BUTTON_CLICK);
+			  startActivity(new Intent(MainActivity.this, GameActivity.class));
+			 
+			}
+		  
+	  });	  
+	  
 	  
 	  aboutItem.setOnClickListener(new View.OnClickListener() {
 		

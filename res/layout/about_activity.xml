@@ -13,39 +13,41 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="110dp"
         android:orientation="vertical"
         android:padding="20dp" >
 
         <TextView
             android:id="@+id/txt_about"
-            android:autoLink="web" 
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:autoLink="web"
             android:linksClickable="true"
+            android:text="@string/credits"
             android:textColor="#555"
-            android:textSize="14sp"
             android:textColorLink="#555"
-            android:text="@string/credits" />
-            
+            android:textSize="14sp" />
+
         <View
-            android:background="#444"
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="15dp" />
 
         <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:fillViewport="true" >
 
             <TextView
                 android:id="@+id/txt_about_rules"
+                style="@style/AppTheme"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
                 android:linksClickable="false"
-                android:textColor="@android:color/black"
+                android:textColor="#222"
                 android:textSize="14sp" />
         </ScrollView>
 
@@ -53,10 +55,11 @@
             android:id="@+id/back_item"
             style="@style/MenuFont"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:text="@string/menu_back"
             android:textSize="18sp" />
     </LinearLayout>
