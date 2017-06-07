@@ -19,7 +19,7 @@ public interface IConfig {
 	/** Największa możliwa liczba wierszy (nieparzyste) */
 	int MAX_COLS_AND_ROWS = 15;   
 	/** Domyślna liczba wierszy i kolumn planszy */
-	int DEFAULT_COLS_AND_ROWS = 11;
+	int DEFAULT_COLS_AND_ROWS = 15;
 	   
 	/** Najmniejsza możliwa liczba kamieni w rzędzie wymagana do wygranej */
 	int MIN_PIECES_IN_ROW = 3;
@@ -27,6 +27,9 @@ public interface IConfig {
 	int MAX_PIECES_IN_ROW = 5;
 	/** Domyślna liczba kamieni w rzędzie */
 	int DEFAULT_PIECES_IN_ROW = 5;
+	
+	/** Domyślna minimalna wielkość pola planszy (w px) */
+	int DEFAULT_MIN_PX_FIELD = 30;
 	   
 	/** Czy komputer zaczyna grę (czarne) */
 	boolean DEFAULT_COMPUTER_STARTS = true;  

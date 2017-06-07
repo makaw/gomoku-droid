@@ -45,7 +45,8 @@ public class AboutActivity extends AppActivity {
 			
 			@Override
 			public void onClick(View v) {
-				AboutActivity.this.finish();
+			  v.startAnimation(BUTTON_CLICK);
+			  AboutActivity.this.finish();
 			}
 		});
          

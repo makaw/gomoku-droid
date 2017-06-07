@@ -24,8 +24,8 @@ import android.widget.Toast;
  */
 public abstract class AppActivity extends Activity {
 
-	/** Efekt naciśnięcia przycisku */
-	protected static AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.7F);
+	/** Animacja po kliknięciu przycisku */
+	protected static AlphaAnimation BUTTON_CLICK = new AlphaAnimation(1F, 0.7F);	
 
 	/** Okienko oczekiwania */
 	protected ProgressDialog pDialog;

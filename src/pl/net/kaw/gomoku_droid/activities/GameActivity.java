@@ -25,7 +25,6 @@ public class GameActivity extends AppActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
         
-        
     }
     
     

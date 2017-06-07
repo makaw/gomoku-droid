@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
 
@@ -27,9 +26,6 @@ import pl.net.kaw.gomoku_droid.R;
 public class MainActivity extends AppActivity {
 
 	
-	/** Animacja po kliknięciu przycisku */
-	private static AlphaAnimation BUTTON_CLICK = new AlphaAnimation(1F, 0.7F);	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -38,9 +34,9 @@ public class MainActivity extends AppActivity {
 	  setContentView(R.layout.main_activity);
 	  
 	  Typeface font = Typeface.createFromAsset(getAssets(),"fonts/vertiup2.ttf");
-	  final TextView startItem = (TextView) findViewById(R.id.start_item);
+	  TextView startItem = (TextView) findViewById(R.id.start_item);
 	  startItem.setTypeface(font);
-	  final TextView aboutItem = (TextView) findViewById(R.id.about_item);
+	  TextView aboutItem = (TextView) findViewById(R.id.about_item);
 	  aboutItem.setTypeface(font);
 	  TextView settingsItem = (TextView) findViewById(R.id.settings_item);
 	  settingsItem.setTypeface(font);
@@ -53,7 +49,7 @@ public class MainActivity extends AppActivity {
 		  @Override
 		  public void onClick(View view) {
 			  
-			  startItem.startAnimation(BUTTON_CLICK);
+			  view.startAnimation(BUTTON_CLICK);
 			  startActivity(new Intent(MainActivity.this, GameActivity.class));
 			 
 			}
@@ -66,7 +62,7 @@ public class MainActivity extends AppActivity {
 		  @Override
 		  public void onClick(View view) {
 			  
-			  aboutItem.startAnimation(BUTTON_CLICK);
+			  view.startAnimation(BUTTON_CLICK);
 			  startActivity(new Intent(MainActivity.this, AboutActivity.class));
 			 
 			}
@@ -80,7 +76,7 @@ public class MainActivity extends AppActivity {
 		public void onClick(View v) {			
 			
 			  
-		 exitItem.startAnimation(BUTTON_CLICK);
+		  v.startAnimation(BUTTON_CLICK);
 	
 			
 		  new AlertDialog.Builder(MainActivity.this)

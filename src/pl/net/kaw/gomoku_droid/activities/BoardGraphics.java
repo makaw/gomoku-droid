@@ -23,18 +23,20 @@ import pl.net.kaw.gomoku_droid.app.IConfig;
  */
 public class BoardGraphics extends View {
     
+  private static int MIN_PX_FIELD = IConfig.DEFAULT_MIN_PX_FIELD;	
+	
   /** Ilość wierszy i kolumn planszy */
   private int colsAndRows = IConfig.DEFAULT_COLS_AND_ROWS;
   /** Bieżący kontekst */
   private final Context context;
   /** Ustawienia rysowania */
   private Paint paint;
-  /** Rozdzielczość ekranu */
-  private float screenDensity;
   /** Szerokość i wysokość (w pikselach) pojedynczego pola planszy */   
   private int pxField;
   /** Dodatkowy lewy margines planszy */
   private int pxBoardMargin;
+  
+  private int pxBoardSize;
   
 
   public BoardGraphics(Context context) {
@@ -69,13 +71,25 @@ public class BoardGraphics extends View {
     paint.setStrokeWidth(1.5f);        
 
 	DisplayMetrics metrics = new DisplayMetrics();
-    ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
-    screenDensity = metrics.density;     
+    ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics); 
     
     pxField = (int)Math.round(metrics.widthPixels * 0.75f / colsAndRows);
-    pxBoardMargin = (int)Math.round(pxField *0.75f);	
+    if (pxField < MIN_PX_FIELD) pxField = MIN_PX_FIELD;
+    pxBoardMargin = (int)Math.round(pxField *0.4f);	
+    pxBoardSize = pxField * colsAndRows + pxBoardMargin;
     
   }
+  
+  
+  
+  @Override
+  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+  
+	 super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	 setMeasuredDimension(pxBoardSize, pxBoardSize);
+	  
+  }
+  
   
 
   @SuppressLint("DrawAllocation")
@@ -127,7 +141,7 @@ public class BoardGraphics extends View {
  
   
   private int getPix(int pixels) {
-	return (int) (pixels * screenDensity);
+	return pixels;
   }
 
 
