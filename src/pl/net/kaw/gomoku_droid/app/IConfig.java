@@ -37,6 +37,8 @@ public interface IConfig {
 	/** Domyślnie - czy włączony jest dźwięk */
 	boolean DEFAULT_ENABLE_SOUND = true;     	
 	
+	/** Czy wł. debugowanie */
+	boolean DEBUG = false;
 	
 	/** Wersja aplikacji */
 	String VERSION = "0.6 (build %s)";

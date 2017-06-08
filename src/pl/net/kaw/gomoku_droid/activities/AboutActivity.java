@@ -10,18 +10,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.zip.ZipFile;
 
-import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.app.Helpers;
 import pl.net.kaw.gomoku_droid.app.IConfig;
 
 
@@ -52,7 +48,7 @@ public class AboutActivity extends AppActivity {
          
   	    backItem.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/vertiup2.ttf"));
         
-  	    String version = String.format(IConfig.VERSION, getBuildDate());
+  	    String version = String.format(IConfig.VERSION, Helpers.getBuildDate(this));
   	    ((TextView) findViewById(R.id.txt_about)).setText(getString(R.string.credits, version));
        
         try {
@@ -102,29 +98,5 @@ public class AboutActivity extends AppActivity {
         
     }
         
-    
-    
-    /**
-     * Zwraca datę zbudowania pakietu
-     * @return j.w.
-     */
-    private String getBuildDate() {
- 	  
- 	 String build = "n/a";  
- 	   
-      try {
- 	   ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), 0);
- 	   ZipFile zf = new ZipFile(ai.sourceDir);
- 	   Date modDate = new Date(zf.getEntry("classes.dex").getTime());
- 	   build = new SimpleDateFormat("yyMMdd.HHmm", Locale.getDefault()).format(modDate);
- 	   zf.close();
- 	 }
-      catch(Exception e) {}
-      
-      return build;
- 	   
-    }    
-    
-    
     
 }

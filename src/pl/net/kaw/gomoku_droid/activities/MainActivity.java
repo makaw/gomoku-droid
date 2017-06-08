@@ -6,8 +6,6 @@
 package pl.net.kaw.gomoku_droid.activities;
 
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -40,7 +38,7 @@ public class MainActivity extends AppActivity {
 	  aboutItem.setTypeface(font);
 	  TextView settingsItem = (TextView) findViewById(R.id.settings_item);
 	  settingsItem.setTypeface(font);
-	  final TextView exitItem = (TextView) findViewById(R.id.exit_item);
+	  TextView exitItem = (TextView) findViewById(R.id.exit_item);
 	  exitItem.setTypeface(font);	
 	  
 	  
@@ -75,32 +73,32 @@ public class MainActivity extends AppActivity {
 		@Override
 		public void onClick(View v) {			
 			
-			  
 		  v.startAnimation(BUTTON_CLICK);
-	
-			
-		  new AlertDialog.Builder(MainActivity.this)
-	        .setCancelable(false)
-	        .setMessage(getString(R.string.confirm_quit))
-	        .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {	        	
-	           @Override
-	           public void onClick(DialogInterface dialog, int which) {	            	    	   
-	    	     ExitActivity.exit(getApplicationContext());
-	           }
-	       })
-	       .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {	        	
-	           @Override
-	           public void onClick(DialogInterface dialog, int which) {	            	    	   
-	        	   exitItem.clearAnimation();
-	           }
-	       })
-	       .show();
-						
+		  onBackPressed();
+		
 		}
+							
 	});
-	  	  
-	 
-	}
+	  	  	
+  }
+	
+	
+
+    
+  @Override
+  public void onBackPressed() {
+    	
+	ModDialog.showConfirmDialog(MainActivity.this, getString(R.string.confirm_quit), 
+	  new View.OnClickListener() {			
+	    @Override
+		public void onClick(View v) {
+		  v.startAnimation(BUTTON_CLICK);
+		  ExitActivity.exit(getApplicationContext());
+		}
+	  }
+	);		
+    	
+  }
 	
 
 }

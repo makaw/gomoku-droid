@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="85dp"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="84dp"
+        android:layout_gravity="start|top"
+        android:background="@drawable/bg_toolbar"
+        android:orientation="vertical"
+        android:padding="2dp"
+        android:textColor="@color/fg_toolbar" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:padding="2dp" >
+
+            <Button
+                android:id="@+id/gtb_zoom_out_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/ic_zoom_out"
+                android:contentDescription="@string/gtb_zoom_out" />
+
+            <Button
+                android:id="@+id/gtb_zoom_in_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/ic_zoom_in"
+                android:contentDescription="@string/gtb_zoom_in" />
+
+            <Button
+                android:id="@+id/gtb_help_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/ic_help"
+                android:contentDescription="@string/gtb_help" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/gtb_restart_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/ic_restart"
+                android:contentDescription="@string/gtb_restart" />
+
+            <Button
+                android:id="@+id/gtb_back_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="2dp"
+                android:background="@drawable/ic_back"
+                android:contentDescription="@string/gtb_back" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="23dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+				android:paddingTop="3dp"
+                android:contentDescription="@string/white_stones"
+                android:src="@drawable/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/computer"
+                android:textColor="@color/fg_toolbar"
+                android:textSize="12sp" />
+            
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+				android:paddingTop="3dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:contentDescription="@string/black_stones"
+                android:src="@drawable/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:text="@string/player"
+                android:textColor="@color/fg_toolbar"
+                android:textSize="12sp" />            
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/gtb_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:paddingBottom="2dp"
+                android:textColor="@color/fg_toolbar"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/bg_toolbar_border"
+        android:orientation="vertical" />
+
+</LinearLayout>

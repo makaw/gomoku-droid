@@ -23,8 +23,8 @@ import pl.net.kaw.gomoku_droid.app.IConfig;
  */
 public class BoardGraphics extends View {
     
-  private static int MIN_PX_FIELD = IConfig.DEFAULT_MIN_PX_FIELD;	
-	
+  /** Minimalna długość boku pola (w px) */	
+  private int minPxField = IConfig.DEFAULT_MIN_PX_FIELD;		
   /** Ilość wierszy i kolumn planszy */
   private int colsAndRows = IConfig.DEFAULT_COLS_AND_ROWS;
   /** Bieżący kontekst */
@@ -35,7 +35,7 @@ public class BoardGraphics extends View {
   private int pxField;
   /** Dodatkowy lewy margines planszy */
   private int pxBoardMargin;
-  
+  /** Długość boku planszy */
   private int pxBoardSize;
   
 
@@ -74,7 +74,7 @@ public class BoardGraphics extends View {
     ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics); 
     
     pxField = (int)Math.round(metrics.widthPixels * 0.75f / colsAndRows);
-    if (pxField < MIN_PX_FIELD) pxField = MIN_PX_FIELD;
+    if (pxField < minPxField) pxField = minPxField;
     pxBoardMargin = (int)Math.round(pxField *0.4f);	
     pxBoardSize = pxField * colsAndRows + pxBoardMargin;
     
@@ -98,10 +98,8 @@ public class BoardGraphics extends View {
     
 	super.onDraw(canvas);		
 		
-    int i,j;
-   
     // rysowanie planszy (siatka i podpisy)
-    for (i=0;i<colsAndRows;i++) {
+    for (int i=0;i<colsAndRows;i++) {
         
       canvas.drawLine(
     		  getPix(pxBoardMargin+i*pxField+12), getPix(pxBoardMargin),
@@ -128,7 +126,7 @@ public class BoardGraphics extends View {
     while (tmp > 11) tmp-=4;
     
     if (tmp == 11) {
-      for (i=3; i<=colsAndRows-4; i+=4) for (j=3; j<=colsAndRows-4; j+=4) {
+      for (int i=3; i<=colsAndRows-4; i+=4) for (int j=3; j<=colsAndRows-4; j+=4) {
         canvas.drawArc(
           new RectF(getPix(pxBoardMargin+pxField*i+9),
         		    getPix(pxBoardMargin+pxField*j-3),

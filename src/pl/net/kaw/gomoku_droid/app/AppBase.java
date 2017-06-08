@@ -24,7 +24,7 @@ public class AppBase extends Application {
 	/** Instancja klasy */
 	private static AppBase INSTANCE;
 
-	/** Host serwisów */
+	/** Ustawienia z pliku properties */
 	private Properties properties;
 	
 	
