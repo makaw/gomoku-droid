@@ -23,6 +23,11 @@ import pl.net.kaw.gomoku_droid.app.IConfig;
  */
 public class BoardGraphics extends View {
     
+  /** Dodatkowy lewy margines planszy */
+  private static final int PX_BOARD_MARGIN_H = 15;
+  /** Dodatkowy górny margines planszy */
+  private static final int PX_BOARD_MARGIN_V = 25;  	
+	
   /** Minimalna długość boku pola (w px) */	
   private int minPxField = IConfig.DEFAULT_MIN_PX_FIELD;		
   /** Ilość wierszy i kolumn planszy */
@@ -33,10 +38,10 @@ public class BoardGraphics extends View {
   private Paint paint;
   /** Szerokość i wysokość (w pikselach) pojedynczego pola planszy */   
   private int pxField;
-  /** Dodatkowy lewy margines planszy */
-  private int pxBoardMargin;
   /** Długość boku planszy */
   private int pxBoardSize;
+  /** Wysokość planszy -1 rząd */
+  private int pxBoardSizeDec;
   
 
   public BoardGraphics(Context context) {
@@ -75,8 +80,8 @@ public class BoardGraphics extends View {
     
     pxField = (int)Math.round(metrics.widthPixels * 0.75f / colsAndRows);
     if (pxField < minPxField) pxField = minPxField;
-    pxBoardMargin = (int)Math.round(pxField *0.4f);	
-    pxBoardSize = pxField * colsAndRows + pxBoardMargin;
+    pxBoardSize = pxField * colsAndRows + PX_BOARD_MARGIN_H*2;
+    pxBoardSizeDec = PX_BOARD_MARGIN_V + (colsAndRows-1)*pxField;
     
   }
   
@@ -86,7 +91,7 @@ public class BoardGraphics extends View {
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
   
 	 super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-	 setMeasuredDimension(pxBoardSize, pxBoardSize);
+	 setMeasuredDimension(pxBoardSize, pxBoardSize - PX_BOARD_MARGIN_H + PX_BOARD_MARGIN_V);
 	  
   }
   
@@ -102,22 +107,27 @@ public class BoardGraphics extends View {
     for (int i=0;i<colsAndRows;i++) {
         
       canvas.drawLine(
-    		  getPix(pxBoardMargin+i*pxField+12), getPix(pxBoardMargin),
-    		  getPix(pxBoardMargin+i*pxField+12), 
-    		  getPix(pxBoardMargin+(colsAndRows-1)*pxField), paint);
+    		  getPix(PX_BOARD_MARGIN_H+i*pxField+12), getPix(PX_BOARD_MARGIN_V),
+    		  getPix(PX_BOARD_MARGIN_H+i*pxField+12), getPix(pxBoardSizeDec), paint);
       
       canvas.drawText(Character.toString((char)('A' + i)), 
-    		  getPix(pxBoardMargin+i*pxField+9), 
-              getPix(pxBoardMargin+(colsAndRows-1)*pxField+21), paint);
+    		  getPix(PX_BOARD_MARGIN_H+i*pxField+9), getPix(pxBoardSizeDec+21), paint);
+      
+      canvas.drawText(Character.toString((char)('A' + i)), 
+    		  getPix(PX_BOARD_MARGIN_H+i*pxField+9), 10, paint);      
     
       canvas.drawLine(
-    		  getPix(pxBoardMargin+12), getPix(pxBoardMargin+i*pxField),
-    		  getPix(pxBoardMargin+(colsAndRows-1)*pxField+12),
-    		  getPix(pxBoardMargin+i*pxField), paint);
+    		  getPix(PX_BOARD_MARGIN_H+12), getPix(PX_BOARD_MARGIN_V+i*pxField),
+    		  getPix(PX_BOARD_MARGIN_H+(colsAndRows-1)*pxField+12),
+    		  getPix(PX_BOARD_MARGIN_V+i*pxField), paint);
       
       canvas.drawText(Integer.toString(colsAndRows-i), 
-    		  getPix(pxBoardMargin-(i<6 ? 13:11)), 
-              getPix(pxBoardMargin+i*pxField+4), paint);
+    		  getPix(PX_BOARD_MARGIN_H-(i<6 ? 13:11)), 
+    		  getPix(PX_BOARD_MARGIN_V+i*pxField+4), paint);
+      
+      canvas.drawText(Integer.toString(colsAndRows-i), 
+    		  getPix(pxBoardSize - PX_BOARD_MARGIN_H -(i<6 ? 6 : 0)),
+    		  getPix(PX_BOARD_MARGIN_V+i*pxField+4), paint);      
 
     }
    
@@ -128,10 +138,10 @@ public class BoardGraphics extends View {
     if (tmp == 11) {
       for (int i=3; i<=colsAndRows-4; i+=4) for (int j=3; j<=colsAndRows-4; j+=4) {
         canvas.drawArc(
-          new RectF(getPix(pxBoardMargin+pxField*i+9),
-        		    getPix(pxBoardMargin+pxField*j-3),
-        		    getPix(pxBoardMargin+pxField*i+15),
-        		    getPix(pxBoardMargin+pxField*j+3)), 0, 360, true, paint);
+          new RectF(getPix(PX_BOARD_MARGIN_H+pxField*i+9),
+        		    getPix(PX_BOARD_MARGIN_V+pxField*j-3),
+        		    getPix(PX_BOARD_MARGIN_H+pxField*i+15),
+        		    getPix(PX_BOARD_MARGIN_V+pxField*j+3)), 0, 360, true, paint);
       }
     }
    
