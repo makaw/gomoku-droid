@@ -17,6 +17,7 @@
         android:textColor="@color/fg_toolbar" >
 
         <LinearLayout
+            style="android:attr/buttonBarStyle"
             android:layout_width="fill_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
@@ -24,46 +25,61 @@
 
             <Button
                 android:id="@+id/gtb_zoom_out_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="2dp"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
                 android:background="@drawable/ic_zoom_out"
                 android:contentDescription="@string/gtb_zoom_out" />
 
             <Button
                 android:id="@+id/gtb_zoom_in_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="2dp"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
                 android:background="@drawable/ic_zoom_in"
                 android:contentDescription="@string/gtb_zoom_in" />
 
             <Button
                 android:id="@+id/gtb_help_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="2dp"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
                 android:background="@drawable/ic_help"
                 android:contentDescription="@string/gtb_help" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <Button
+                android:id="@+id/gtb_sound_btn"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/ic_sound"
+                android:contentDescription="@string/gtb_sound" />
 
             <Button
                 android:id="@+id/gtb_restart_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="2dp"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
                 android:background="@drawable/ic_restart"
                 android:contentDescription="@string/gtb_restart" />
 
             <Button
                 android:id="@+id/gtb_back_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="2dp"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
                 android:background="@drawable/ic_back"
                 android:contentDescription="@string/gtb_back" />
         </LinearLayout>
@@ -80,8 +96,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-				android:paddingTop="3dp"
                 android:contentDescription="@string/white_stones"
+                android:paddingTop="3dp"
                 android:src="@drawable/white" />
 
             <TextView
@@ -92,14 +108,14 @@
                 android:text="@string/computer"
                 android:textColor="@color/fg_toolbar"
                 android:textSize="12sp" />
-            
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-				android:paddingTop="3dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginStart="15dp"
                 android:contentDescription="@string/black_stones"
+                android:paddingTop="3dp"
                 android:src="@drawable/black" />
 
             <TextView
@@ -109,7 +125,7 @@
                 android:layout_marginStart="5dp"
                 android:text="@string/player"
                 android:textColor="@color/fg_toolbar"
-                android:textSize="12sp" />            
+                android:textSize="12sp" />
 
             <View
                 android:layout_width="0dp"

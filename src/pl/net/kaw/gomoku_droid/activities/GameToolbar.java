@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.app.AppBase;
 
 
 /**
@@ -67,12 +68,28 @@ public class GameToolbar {
 	  }
 	});      
       
+    
+    final Button soundBtn = (Button) activity.findViewById(R.id.gtb_sound_btn);
+    boolean snd = AppBase.getInstance().isSound();
+    soundBtn.setBackgroundResource(snd ? R.drawable.ic_sound : R.drawable.ic_sound_off); 
+    
+    soundBtn.setOnClickListener(new View.OnClickListener() {		
+		@Override
+		public void onClick(View v) {
+		  v.startAnimation(AppActivity.BUTTON_CLICK);
+		  boolean snd = AppBase.getInstance().isSound();
+		  AppBase.getInstance().setSound(!snd);
+		  soundBtn.setBackgroundResource(snd ? R.drawable.ic_sound_off : R.drawable.ic_sound);
+		}
+	});
+    
     // tooltips
     CheatSheet.setup(activity.findViewById(R.id.gtb_zoom_in_btn));
     CheatSheet.setup(activity.findViewById(R.id.gtb_zoom_out_btn));
     CheatSheet.setup(helpBtn);
+    CheatSheet.setup(soundBtn);
     CheatSheet.setup(activity.findViewById(R.id.gtb_restart_btn));
-    CheatSheet.setup(backBtn);	  
+    CheatSheet.setup(backBtn);    
 	  	  
   }
   
@@ -104,7 +121,7 @@ public class GameToolbar {
   public void stopTimer() {
 	 timerSecTmp = 0; 
 	 timer.stop();
-  }
-	
+  }	  
+  
   
 }

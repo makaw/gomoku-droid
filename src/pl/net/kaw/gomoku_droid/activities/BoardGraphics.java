@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Point;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -23,10 +24,8 @@ import pl.net.kaw.gomoku_droid.app.IConfig;
  */
 public class BoardGraphics extends View {
     
-  /** Dodatkowy lewy margines planszy */
-  private static final int PX_BOARD_MARGIN_H = 15;
-  /** Dodatkowy górny margines planszy */
-  private static final int PX_BOARD_MARGIN_V = 25;  	
+  /** Dodatkowe marginesy planszy */
+  private static final Point PX_BOARD_MARGIN = new Point(15, 25);
 	
   /** Minimalna długość boku pola (w px) */	
   private int minPxField = IConfig.DEFAULT_MIN_PX_FIELD;		
@@ -38,10 +37,10 @@ public class BoardGraphics extends View {
   private Paint paint;
   /** Szerokość i wysokość (w pikselach) pojedynczego pola planszy */   
   private int pxField;
-  /** Długość boku planszy */
-  private int pxBoardSize;
+  /** Wymiary komponentu planszy */
+  private Point pxBoardSize;
   /** Wysokość planszy -1 rząd */
-  private int pxBoardSizeDec;
+  private int pxBoardSizeDecY;
   
 
   public BoardGraphics(Context context) {
@@ -80,8 +79,9 @@ public class BoardGraphics extends View {
     
     pxField = (int)Math.round(metrics.widthPixels * 0.75f / colsAndRows);
     if (pxField < minPxField) pxField = minPxField;
-    pxBoardSize = pxField * colsAndRows + PX_BOARD_MARGIN_H*2;
-    pxBoardSizeDec = PX_BOARD_MARGIN_V + (colsAndRows-1)*pxField;
+    pxBoardSize = new Point(pxField * colsAndRows + PX_BOARD_MARGIN.x*2, 
+    		pxField * colsAndRows + PX_BOARD_MARGIN.y);
+    pxBoardSizeDecY = PX_BOARD_MARGIN.y + (colsAndRows-1)*pxField;
     
   }
   
@@ -91,7 +91,7 @@ public class BoardGraphics extends View {
   protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
   
 	 super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-	 setMeasuredDimension(pxBoardSize, pxBoardSize - PX_BOARD_MARGIN_H + PX_BOARD_MARGIN_V);
+	 setMeasuredDimension(pxBoardSize.x, pxBoardSize.y);
 	  
   }
   
@@ -106,28 +106,24 @@ public class BoardGraphics extends View {
     // rysowanie planszy (siatka i podpisy)
     for (int i=0;i<colsAndRows;i++) {
         
-      canvas.drawLine(
-    		  getPix(PX_BOARD_MARGIN_H+i*pxField+12), getPix(PX_BOARD_MARGIN_V),
-    		  getPix(PX_BOARD_MARGIN_H+i*pxField+12), getPix(pxBoardSizeDec), paint);
+      canvas.drawLine(PX_BOARD_MARGIN.x+i*pxField+12, PX_BOARD_MARGIN.y,
+    		  PX_BOARD_MARGIN.x+i*pxField+12, pxBoardSizeDecY, paint);
       
-      canvas.drawText(Character.toString((char)('A' + i)), 
-    		  getPix(PX_BOARD_MARGIN_H+i*pxField+9), getPix(pxBoardSizeDec+21), paint);
+      canvas.drawText(Character.toString((char)('A' + i)), PX_BOARD_MARGIN.x+i*pxField+9,
+    		  pxBoardSizeDecY + 21, paint);
       
-      canvas.drawText(Character.toString((char)('A' + i)), 
-    		  getPix(PX_BOARD_MARGIN_H+i*pxField+9), 10, paint);      
+      canvas.drawText(Character.toString((char)('A' + i)), PX_BOARD_MARGIN.x+i*pxField+9,
+    		  10, paint);      
     
-      canvas.drawLine(
-    		  getPix(PX_BOARD_MARGIN_H+12), getPix(PX_BOARD_MARGIN_V+i*pxField),
-    		  getPix(PX_BOARD_MARGIN_H+(colsAndRows-1)*pxField+12),
-    		  getPix(PX_BOARD_MARGIN_V+i*pxField), paint);
+      canvas.drawLine(PX_BOARD_MARGIN.x+12, PX_BOARD_MARGIN.y+i*pxField,
+    		  PX_BOARD_MARGIN.x+(colsAndRows-1)*pxField+12, PX_BOARD_MARGIN.y+i*pxField, paint);
+      
+      canvas.drawText(Integer.toString(colsAndRows-i), PX_BOARD_MARGIN.x-(i<6 ? 13:11), 
+    		  PX_BOARD_MARGIN.y+i*pxField+4, paint);
       
       canvas.drawText(Integer.toString(colsAndRows-i), 
-    		  getPix(PX_BOARD_MARGIN_H-(i<6 ? 13:11)), 
-    		  getPix(PX_BOARD_MARGIN_V+i*pxField+4), paint);
-      
-      canvas.drawText(Integer.toString(colsAndRows-i), 
-    		  getPix(pxBoardSize - PX_BOARD_MARGIN_H -(i<6 ? 6 : 0)),
-    		  getPix(PX_BOARD_MARGIN_V+i*pxField+4), paint);      
+    		  pxBoardSize.x - PX_BOARD_MARGIN.x -(i<6 ? 6 : 0), 
+    		  PX_BOARD_MARGIN.y+i*pxField+4, paint);      
 
     }
    
@@ -138,20 +134,13 @@ public class BoardGraphics extends View {
     if (tmp == 11) {
       for (int i=3; i<=colsAndRows-4; i+=4) for (int j=3; j<=colsAndRows-4; j+=4) {
         canvas.drawArc(
-          new RectF(getPix(PX_BOARD_MARGIN_H+pxField*i+9),
-        		    getPix(PX_BOARD_MARGIN_V+pxField*j-3),
-        		    getPix(PX_BOARD_MARGIN_H+pxField*i+15),
-        		    getPix(PX_BOARD_MARGIN_V+pxField*j+3)), 0, 360, true, paint);
+          new RectF(PX_BOARD_MARGIN.x+pxField*i+9, PX_BOARD_MARGIN.y+pxField*j-3,
+        		    PX_BOARD_MARGIN.x+pxField*i+15,PX_BOARD_MARGIN.y+pxField*j+3),
+          0, 360, true, paint);
       }
     }
    
   }
  
-  
-  private int getPix(int pixels) {
-	return pixels;
-  }
-
-
   
 }

@@ -27,6 +27,8 @@ public class AppBase extends Application {
 	/** Ustawienia z pliku properties */
 	private Properties properties;
 	
+	private boolean sound = IConfig.DEFAULT_ENABLE_SOUND;
+	
 	
 	@Override
 	public void onCreate() {
@@ -48,6 +50,17 @@ public class AppBase extends Application {
 	public Properties getProperties() {
 	  return properties;
 	}
+
+
+	public boolean isSound() {
+		return sound;
+	}
+
+
+	public void setSound(boolean sound) {
+		this.sound = sound;
+	}
+	
 	
 	
 		

@@ -25,6 +25,7 @@
     <string name="gtb_back">Zakończ grę</string>
     <string name="gtb_restart">Rozpocznij nową grę</string>
     <string name="gtb_help">Pomoc / informacje</string>
+    <string name="gtb_sound">Włącz / wyłącz dźwięk</string>
     <string name="gtb_zoom_in">Powiększ widok planszy</string>
     <string name="gtb_zoom_out">Pomniejsz widok planszy</string>
     
