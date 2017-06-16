@@ -45,6 +45,6 @@ public interface IConfig {
 	int DEFAULT_LOCALE_INDEX = 0;	
 	
 	/** Wersja aplikacji */
-	String VERSION = "0.6 (build %s)";
+	String VERSION = "0.0.6 (build %s)";
 	
 }

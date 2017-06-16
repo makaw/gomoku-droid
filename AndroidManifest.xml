@@ -7,17 +7,18 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="25" />
- 
+
     <application
         android:name=".app.AppBase"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" 
+        android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,15 +29,18 @@
         <activity
             android:name=".activities.GameActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <activity
             android:name=".activities.AboutActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <activity
             android:name=".activities.SettingsActivity"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />        
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <activity
             android:name=".activities.ExitActivity"
             android:theme="@android:style/Theme.NoDisplay" />

@@ -3,7 +3,7 @@
  *  https://github.com/makaw/gomoku-droid
  *  
  */
-package pl.net.kaw.gomoku_droid.activities;
+package pl.net.kaw.gomoku_droid.activities.gui;
 
 import java.util.concurrent.Callable;
 
@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.activities.AppActivity;
 
 
 

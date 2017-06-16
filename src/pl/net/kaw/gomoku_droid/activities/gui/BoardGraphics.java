@@ -1,4 +1,9 @@
-package pl.net.kaw.gomoku_droid.activities;
+/*
+ *  Gomoku 4 Android
+ *  https://github.com/makaw/gomoku-droid
+ *  
+ */
+package pl.net.kaw.gomoku_droid.activities.gui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

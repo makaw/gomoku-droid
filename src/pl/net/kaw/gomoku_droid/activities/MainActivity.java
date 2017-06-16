@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.activities.gui.ModDialog;
 
 
 /**

@@ -3,7 +3,7 @@
  *  https://github.com/makaw/gomoku-droid
  *  
  */
-package pl.net.kaw.gomoku_droid.activities;
+package pl.net.kaw.gomoku_droid.activities.gui;
 
 import com.example.android.cheatsheet.CheatSheet;
 
@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.activities.AboutActivity;
+import pl.net.kaw.gomoku_droid.activities.AppActivity;
+import pl.net.kaw.gomoku_droid.activities.GameActivity;
+import pl.net.kaw.gomoku_droid.activities.GameTimer;
 import pl.net.kaw.gomoku_droid.app.AppBase;
 import pl.net.kaw.gomoku_droid.app.Helpers;
 
@@ -105,12 +109,22 @@ public class GameToolbar {
 		}
 	});
     
+    Button restartBtn = (Button) activity.findViewById(R.id.gtb_restart_btn);
+    restartBtn.setOnClickListener(new View.OnClickListener() {		
+	  @Override
+	  public void onClick(View v) {
+		v.startAnimation(AppActivity.BUTTON_CLICK);
+		activity.message(activity.getString(R.string.not_implemented));
+	  }
+	});
+    
+    
     // tooltips
     CheatSheet.setup(zoomInBtn);
     CheatSheet.setup(zoomOutBtn);
     CheatSheet.setup(helpBtn);
     CheatSheet.setup(soundBtn);
-    CheatSheet.setup(activity.findViewById(R.id.gtb_restart_btn));
+    CheatSheet.setup(restartBtn);
     CheatSheet.setup(backBtn);    
 	  	  
   }

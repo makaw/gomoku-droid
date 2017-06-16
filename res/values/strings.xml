@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Gomoku</string>
+    <string name="app_name">Gomoku 4 Android</string>
 	<string name="credits">Gomoku v. %s\nhttp://github.com/makaw/gomoku-droid</string>
 	
     <string name="menu_newgame">NEW GAME</string>
@@ -30,6 +30,8 @@
     <string name="gtb_sound">Sound on/off</string>
     <string name="gtb_zoom_in">Board zoom in</string>
     <string name="gtb_zoom_out">Board zoom out</string>
+    
+    <string name="not_implemented">Not implemented yet ....</string>
     
 </resources>
     

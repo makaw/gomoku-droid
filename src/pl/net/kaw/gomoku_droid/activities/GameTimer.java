@@ -1,3 +1,8 @@
+/*
+ *  Gomoku 4 Android
+ *  https://github.com/makaw/gomoku-droid
+ *  
+ */
 package pl.net.kaw.gomoku_droid.activities;
 
 import android.os.Handler;

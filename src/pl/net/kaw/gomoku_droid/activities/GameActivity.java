@@ -10,6 +10,9 @@ import java.util.concurrent.Callable;
 
 import android.os.Bundle;
 import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.activities.gui.BoardGraphics;
+import pl.net.kaw.gomoku_droid.activities.gui.GameToolbar;
+import pl.net.kaw.gomoku_droid.activities.gui.ModDialog;
 
 
 /**
