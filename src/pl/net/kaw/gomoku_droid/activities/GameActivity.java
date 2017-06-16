@@ -23,7 +23,8 @@ public class GameActivity extends AppActivity {
 	
 	/** Pasek narzędziowy */
 	private GameToolbar toolbar;
-	
+	/** Komponent planszy */
+	private BoardGraphics boardGraphics;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,13 +32,23 @@ public class GameActivity extends AppActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.game_activity);
       
+      boardGraphics = (BoardGraphics) findViewById(R.id.board);
+      
       toolbar = new GameToolbar(this);
       toolbar.init();
       toolbar.startTimer();
         
-    }    
+    }   
     
     
+    public BoardGraphics getBoardGraphics() {
+      return boardGraphics;
+    }
+    
+    
+    /**
+     * Zakończenie rozgrywki
+     */
     public void endGame() {
     	
 	  ModDialog.showConfirmDialog(this, getString(R.string.confirm_end_game), new Callable<Void>() {			

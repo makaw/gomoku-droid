@@ -27,8 +27,6 @@ public class BoardGraphics extends View {
   /** Dodatkowe marginesy planszy */
   private static final Point PX_BOARD_MARGIN = new Point(15, 28);
 	
-  /** Minimalna długość boku pola (w px) */	
-  private int minPxField = IConfig.DEFAULT_MIN_PX_FIELD;		
   /** Ilość wierszy i kolumn planszy */
   private int colsAndRows = IConfig.DEFAULT_COLS_AND_ROWS;
   /** Bieżący kontekst */
@@ -41,6 +39,8 @@ public class BoardGraphics extends View {
   private Point pxBoardSize;
   /** Wysokość planszy -1 rząd */
   private int pxBoardSizeDecY;
+  
+  private float zoomFactor = 1.0f;
   
 
   public BoardGraphics(Context context) {
@@ -76,15 +76,15 @@ public class BoardGraphics extends View {
     paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     paint.setColor(Color.parseColor("#3A3A3A"));
     paint.setStyle(Style.FILL); 
-    paint.setStrokeWidth(2.5f);        
-    paint.setTextSize(16.0f);
+    paint.setStrokeWidth(2.5f); 
+    
+    paint.setTextSize(zoomFactor < 1 ? 14.0f : 16.0f);
 
 	DisplayMetrics metrics = new DisplayMetrics();
     ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics); 
     
-    pxField = (int)Math.round(metrics.widthPixels / colsAndRows) * 2;
-    if (pxField < minPxField) pxField = minPxField;
-    pxBoardSize = new Point(pxField * colsAndRows + PX_BOARD_MARGIN.x*2, 
+    pxField = (int)Math.round(metrics.widthPixels / colsAndRows * zoomFactor) * 2;
+   pxBoardSize = new Point(pxField * colsAndRows + PX_BOARD_MARGIN.x*2, 
     		pxField * colsAndRows + PX_BOARD_MARGIN.y);
     pxBoardSizeDecY = PX_BOARD_MARGIN.y + (colsAndRows-1)*pxField;
     
@@ -104,6 +104,34 @@ public class BoardGraphics extends View {
   }
   
   
+  /**
+   * Czy można zmienić powiększenie planszy
+   * @param out True=zmniejszenie
+   * @return j.w.
+   */
+  public boolean isZoomEnabled(boolean out) {
+	  
+	return !((out && zoomFactor <= 0.6f) || (!out && zoomFactor >= 2.0f));  
+	  
+  }
+  
+  
+  /**
+   * Zmiana powiększenia planszy
+   * @param out True=zmniejszenie
+   */
+  public void zoom(boolean out) {
+	  
+	if (!isZoomEnabled(out)) return;
+	
+	zoomFactor += (out ? -1 : 1) * 0.2f;
+		  
+	init();
+	invalidate();	  
+	  
+  }
+  
+  
 
   @SuppressLint("DrawAllocation")
   @Override
@@ -111,7 +139,7 @@ public class BoardGraphics extends View {
     
 	super.onDraw(canvas);		
 		
-	int marg2 = (int)Math.round(PX_BOARD_MARGIN.x * 1.5);
+	int marg2 = (int)Math.round(PX_BOARD_MARGIN.x * zoomFactor * (zoomFactor > 1 ? 2 : 1));
 	
     // rysowanie planszy (siatka i podpisy)
     for (int i=0;i<colsAndRows;i++) {

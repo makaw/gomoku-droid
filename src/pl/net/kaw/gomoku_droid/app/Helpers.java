@@ -14,6 +14,9 @@ import java.util.zip.ZipFile;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 
@@ -93,6 +96,25 @@ public class Helpers {
 	   
    }
    
+   
+   /**
+    * Zmiana jasności rysunku
+    * @param d Rysunek
+    * @param bright Jasność
+    */
+   public static void setBrightness(Drawable d, int bright) {
+	   
+	 ColorMatrix cm = new ColorMatrix(new float[]
+		{
+		    1, 0, 0, 0, bright,
+		    0, 1, 0, 0, bright,
+		    0, 0, 1, 0, bright,
+		    0, 0, 0, 1, 0
+		});
+		    
+	 d.setColorFilter(new ColorMatrixColorFilter(cm));
+	
+   }
    
    
 	

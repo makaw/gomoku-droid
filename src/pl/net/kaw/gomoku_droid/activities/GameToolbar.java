@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
 import pl.net.kaw.gomoku_droid.app.AppBase;
+import pl.net.kaw.gomoku_droid.app.Helpers;
 
 
 /**
@@ -83,15 +84,62 @@ public class GameToolbar {
 		}
 	});
     
+    final Button zoomInBtn = (Button) activity.findViewById(R.id.gtb_zoom_in_btn);
+    final Button zoomOutBtn = (Button) activity.findViewById(R.id.gtb_zoom_out_btn);
+    
+    zoomInBtn.setOnClickListener(new View.OnClickListener() {		
+		@Override
+		public void onClick(View v) {
+		  v.startAnimation(AppActivity.BUTTON_CLICK);
+		  activity.getBoardGraphics().zoom(false);
+		  enableZoomBtn(zoomInBtn, zoomOutBtn);
+		}
+	});
+    
+    zoomOutBtn.setOnClickListener(new View.OnClickListener() {		
+		@Override
+		public void onClick(View v) {
+		  v.startAnimation(AppActivity.BUTTON_CLICK);
+		  activity.getBoardGraphics().zoom(true);
+		  enableZoomBtn(zoomInBtn, zoomOutBtn);
+		}
+	});
+    
     // tooltips
-    CheatSheet.setup(activity.findViewById(R.id.gtb_zoom_in_btn));
-    CheatSheet.setup(activity.findViewById(R.id.gtb_zoom_out_btn));
+    CheatSheet.setup(zoomInBtn);
+    CheatSheet.setup(zoomOutBtn);
     CheatSheet.setup(helpBtn);
     CheatSheet.setup(soundBtn);
     CheatSheet.setup(activity.findViewById(R.id.gtb_restart_btn));
     CheatSheet.setup(backBtn);    
 	  	  
   }
+  
+  /**
+   * Blokada przycisków powiększenia
+   * @param zoomInBtn Przycisk zoom+
+   * @param zoomOutBtn Przycisk zoom-
+   */
+  private void enableZoomBtn(Button zoomInBtn, Button zoomOutBtn) {
+
+	enableBtn(zoomInBtn, activity.getBoardGraphics().isZoomEnabled(false));
+	enableBtn(zoomOutBtn, activity.getBoardGraphics().isZoomEnabled(true));
+	
+  }
+  
+  /**
+   * Blokada przycisku
+   * @param button Przycisk
+   * @param enabled Dostępny (true), czy zablokowany
+   */
+  private void enableBtn(Button button, boolean enabled)  {
+
+    Helpers.setBrightness(button.getBackground(), enabled ? 0 : -90);
+    button.setEnabled(enabled);
+    
+  } 
+  
+  
   
   /**
    * Uruchomienie licznika

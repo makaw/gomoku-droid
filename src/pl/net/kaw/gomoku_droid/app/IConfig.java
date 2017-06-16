@@ -28,10 +28,7 @@ public interface IConfig {
 	/** Największa możliwa liczba kamieni w rzędzie */
 	int MAX_PIECES_IN_ROW = 5;
 	/** Domyślna liczba kamieni w rzędzie */
-	int DEFAULT_PIECES_IN_ROW = 5;
-	
-	/** Domyślna minimalna wielkość pola planszy (w px) */
-	int DEFAULT_MIN_PX_FIELD = 32;
+	int DEFAULT_PIECES_IN_ROW = 5;	
 	   
 	/** Czy komputer zaczyna grę (czarne) */
 	boolean DEFAULT_COMPUTER_STARTS = true;  
