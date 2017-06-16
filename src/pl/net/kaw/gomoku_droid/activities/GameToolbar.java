@@ -70,16 +70,16 @@ public class GameToolbar {
       
     
     final Button soundBtn = (Button) activity.findViewById(R.id.gtb_sound_btn);
-    boolean snd = AppBase.getInstance().isSound();
-    soundBtn.setBackgroundResource(snd ? R.drawable.ic_sound : R.drawable.ic_sound_off); 
+    boolean snd = AppBase.getInstance().getSettings().isSoundEnabled();
+    soundBtn.setBackgroundResource(snd ? R.drawable.btn_sound : R.drawable.btn_sound_off); 
     
     soundBtn.setOnClickListener(new View.OnClickListener() {		
 		@Override
 		public void onClick(View v) {
 		  v.startAnimation(AppActivity.BUTTON_CLICK);
-		  boolean snd = AppBase.getInstance().isSound();
-		  AppBase.getInstance().setSound(!snd);
-		  soundBtn.setBackgroundResource(snd ? R.drawable.ic_sound_off : R.drawable.ic_sound);
+		  boolean snd = AppBase.getInstance().getSettings().isSoundEnabled();
+		  AppBase.getInstance().getSettings().save(!snd);
+		  soundBtn.setBackgroundResource(snd ? R.drawable.btn_sound_off : R.drawable.btn_sound);
 		}
 	});
     

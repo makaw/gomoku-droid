@@ -6,8 +6,9 @@
 package pl.net.kaw.gomoku_droid.activities;
 
 
+import java.util.concurrent.Callable;
+
 import android.os.Bundle;
-import android.view.View;
 import pl.net.kaw.gomoku_droid.R;
 
 
@@ -39,12 +40,11 @@ public class GameActivity extends AppActivity {
     
     public void endGame() {
     	
-	  ModDialog.showConfirmDialog(this, getString(R.string.confirm_end_game), 
-		new View.OnClickListener() {			
+	  ModDialog.showConfirmDialog(this, getString(R.string.confirm_end_game), new Callable<Void>() {			
 		  @Override
-		  public void onClick(View v) {
-		    v.startAnimation(BUTTON_CLICK);
+		  public Void call() {
 		    GameActivity.this.finish();
+		    return null;
 		  }
 		}
 	  );	

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Gomoku</string>
+	<string name="credits">Gomoku v. %s\nhttp://github.com/makaw/gomoku-droid</string>
+	
+    <string name="menu_newgame">NOWA GRA</string>
+    <string name="menu_about">INFORMACJE</string>
+    <string name="menu_settings">USTAWIENIA</string>
+    <string name="menu_exit">KONIEC</string>    
+    <string name="menu_back">◀ POWRÔT</string>
+    <string name="menu_save">✔ ZAPISZ</string>
+    
+    <string name="confirm">Potwierdzenie</string>
+    <string name="confirm_quit">Czy na pewno zakończyć działanie aplikacji?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="ok"> OK </string>
+    
+    <string name="white_stones">Białe kamienie</string>
+    <string name="black_stones">Czarne kamienie</string>
+    <string name="computer">Komputer</string>
+    <string name="player">Gracz</string>
+    <string name="timer">Czas gry</string>
+    
+    <string name="confirm_end_game">Czy na pewno zakończyć bieżącą grę?</string>    
+    <string name="gtb_back">Zakończ grę</string>
+    <string name="gtb_restart">Rozpocznij nową grę</string>
+    <string name="gtb_help">Informacje</string>
+    <string name="gtb_sound">Włącz / wyłącz dźwięk</string>
+    <string name="gtb_zoom_in">Powiększ widok planszy</string>
+    <string name="gtb_zoom_out">Pomniejsz widok planszy</string>
+    
+</resources>
+    
+    

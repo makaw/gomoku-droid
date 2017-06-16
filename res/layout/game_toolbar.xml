@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/ic_zoom_out"
+                android:background="@drawable/btn_zoom_out"
                 android:contentDescription="@string/gtb_zoom_out" />
 
             <Button
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/ic_zoom_in"
+                android:background="@drawable/btn_zoom_in"
                 android:contentDescription="@string/gtb_zoom_in" />
 
             <Button
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/ic_help"
+                android:background="@drawable/btn_help"
                 android:contentDescription="@string/gtb_help" />
 
             <Button
@@ -60,8 +60,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/ic_sound"
+                android:background="@drawable/btn_sound"
                 android:contentDescription="@string/gtb_sound" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/gtb_restart_btn"
@@ -70,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/ic_restart"
+                android:background="@drawable/btn_restart"
                 android:contentDescription="@string/gtb_restart" />
 
             <Button
@@ -80,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="1dp"
                 android:layout_marginRight="1dp"
-                android:background="@drawable/ic_back"
+                android:background="@drawable/btn_back"
                 android:contentDescription="@string/gtb_back" />
         </LinearLayout>
 
@@ -132,11 +137,20 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/timer"
+                android:paddingTop="3dp"
+                android:src="@drawable/timer" />
+
             <TextView
                 android:id="@+id/gtb_clock"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:paddingBottom="2dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:textColor="@color/fg_toolbar"
                 android:textSize="12sp" />
         </LinearLayout>

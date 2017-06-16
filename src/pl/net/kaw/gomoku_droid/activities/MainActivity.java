@@ -6,6 +6,8 @@
 package pl.net.kaw.gomoku_droid.activities;
 
 
+import java.util.concurrent.Callable;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -41,7 +43,6 @@ public class MainActivity extends AppActivity {
 	  TextView exitItem = (TextView) findViewById(R.id.exit_item);
 	  exitItem.setTypeface(font);	
 	  
-	  
 	  startItem.setOnClickListener(new View.OnClickListener() {
 			
 		  @Override
@@ -68,6 +69,19 @@ public class MainActivity extends AppActivity {
 	  });
 	  
 	  
+	  settingsItem.setOnClickListener(new View.OnClickListener() {
+			
+		  @Override
+		  public void onClick(View view) {
+			  
+			  view.startAnimation(BUTTON_CLICK);
+			  startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+			 
+			}
+		  
+	  });	  
+	  
+	  
 	  exitItem.setOnClickListener(new View.OnClickListener() {
 		
 		@Override
@@ -82,21 +96,21 @@ public class MainActivity extends AppActivity {
 	  	  	
   }
 	
-	
+
 
     
   @Override
   public void onBackPressed() {
     	
 	ModDialog.showConfirmDialog(MainActivity.this, getString(R.string.confirm_quit), 
-	  new View.OnClickListener() {			
-	    @Override
-		public void onClick(View v) {
-		  v.startAnimation(BUTTON_CLICK);
-		  ExitActivity.exit(getApplicationContext());
+	  new Callable<Void>() {			
+		  @Override
+		  public Void call() {
+			ExitActivity.exit(getApplicationContext());
+		    return null;
+		  }
 		}
-	  }
-	);		
+	 );			   
     	
   }
 	

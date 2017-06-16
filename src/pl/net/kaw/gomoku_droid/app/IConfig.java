@@ -5,6 +5,8 @@
  */
 package pl.net.kaw.gomoku_droid.app;
 
+import java.util.Locale;
+
 /**
 *
 * Interfejs konfiguracyjny
@@ -29,7 +31,7 @@ public interface IConfig {
 	int DEFAULT_PIECES_IN_ROW = 5;
 	
 	/** Domyślna minimalna wielkość pola planszy (w px) */
-	int DEFAULT_MIN_PX_FIELD = 30;
+	int DEFAULT_MIN_PX_FIELD = 32;
 	   
 	/** Czy komputer zaczyna grę (czarne) */
 	boolean DEFAULT_COMPUTER_STARTS = true;  
@@ -39,6 +41,11 @@ public interface IConfig {
 	
 	/** Czy wł. debugowanie */
 	boolean DEBUG = false;
+	
+	/** Dostępne lokalizacje */
+	Locale[] LOCALES = { new Locale("en", "US"), new Locale("pl", "PL")};
+	/** Domyślna lokalizacja (indeks) */
+	int DEFAULT_LOCALE_INDEX = 0;	
 	
 	/** Wersja aplikacji */
 	String VERSION = "0.6 (build %s)";

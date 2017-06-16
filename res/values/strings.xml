@@ -4,30 +4,32 @@
     <string name="app_name">Gomoku</string>
 	<string name="credits">Gomoku v. %s\nhttp://github.com/makaw/gomoku-droid</string>
 	
-    <string name="menu_newgame">NOWA GRA</string>
-    <string name="menu_about">INFORMACJE</string>
-    <string name="menu_settings">USTAWIENIA</string>
-    <string name="menu_exit">KONIEC</string>    
-    <string name="menu_back">&lt;&lt; POWRÔT</string>
+    <string name="menu_newgame">NEW GAME</string>
+    <string name="menu_about">ABOUT GOMOKU</string>
+    <string name="menu_settings">SETTINGS</string>
+    <string name="menu_exit">EXIT</string>    
+    <string name="menu_back">◀ BACK</string>
+    <string name="menu_save">✔ SAVE</string>
     
-    <string name="confirm">Potwierdzenie</string>
-    <string name="confirm_quit">Czy na pewno zakończyć działanie aplikacji?</string>
-    <string name="yes">Tak</string>
-    <string name="no">Nie</string>
+    <string name="confirm">Please confirm</string>
+    <string name="confirm_quit">Are you sure you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="ok"> OK </string>
     
-    <string name="white_stones">Białe kamienie</string>
-    <string name="black_stones">Czarne kamienie</string>
-    <string name="computer">Komputer</string>
-    <string name="player">Gracz</string>
+    <string name="white_stones">White stones</string>
+    <string name="black_stones">Black stones</string>
+    <string name="computer">Computer</string>
+    <string name="player">Player</string>
+    <string name="timer">Game time</string>
     
-    <string name="confirm_end_game">Czy na pewno zakończyć bieżącą grę?</string>    
-    <string name="gtb_back">Zakończ grę</string>
-    <string name="gtb_restart">Rozpocznij nową grę</string>
-    <string name="gtb_help">Pomoc / informacje</string>
-    <string name="gtb_sound">Włącz / wyłącz dźwięk</string>
-    <string name="gtb_zoom_in">Powiększ widok planszy</string>
-    <string name="gtb_zoom_out">Pomniejsz widok planszy</string>
+    <string name="confirm_end_game">Are you sure you want to quit the current game?</string>    
+    <string name="gtb_back">Quit game</string>
+    <string name="gtb_restart">Start new game</string>
+    <string name="gtb_help">About Gomoku</string>
+    <string name="gtb_sound">Sound on/off</string>
+    <string name="gtb_zoom_in">Board zoom in</string>
+    <string name="gtb_zoom_out">Board zoom out</string>
     
 </resources>
     

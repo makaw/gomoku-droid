@@ -14,9 +14,11 @@ import java.io.InputStreamReader;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.app.AppBase;
 import pl.net.kaw.gomoku_droid.app.Helpers;
 import pl.net.kaw.gomoku_droid.app.IConfig;
 
@@ -69,8 +71,8 @@ public class AboutActivity extends AppActivity {
         
        AssetManager assetManager = getAssets();
 
-       //String fName = "/Rules_" + Lang.getLocaleSymbol() + ".txt";
-       String fName = "Rules_pl_PL.txt";
+       String fName = "Rules_" 
+    		+ AppBase.getInstance().getSettings().getLanguage().getLocaleSymbol() + ".txt";
        InputStream input = assetManager.open(fName);	
        BufferedReader reader;
        
@@ -78,7 +80,7 @@ public class AboutActivity extends AppActivity {
          reader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
        }
        catch (NullPointerException e) {
-         System.err.println(e);//Lang.get("FileNotFound", "/resources" + fName));
+         if (IConfig.DEBUG) Log.d(tag, "FileNotFound: " + fName);
          return null;
        }
        

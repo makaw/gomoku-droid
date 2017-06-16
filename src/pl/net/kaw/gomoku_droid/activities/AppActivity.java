@@ -75,11 +75,11 @@ public abstract class AppActivity extends Activity {
 	 */
 	public void pDialogDismiss() {
 
-		if (pDialog.isShowing())
-			pDialog.dismiss();
+		if (pDialog.isShowing()) pDialog.dismiss();
 
 	}
 
+	
 	/**
 	 * Wyświetla okienko z komunikatem
 	 * 
@@ -93,6 +93,7 @@ public abstract class AppActivity extends Activity {
 
 	}
 
+	
 	/**
 	 * Wyświetla okienko z błędem
 	 * 

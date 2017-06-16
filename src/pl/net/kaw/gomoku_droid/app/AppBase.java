@@ -5,8 +5,6 @@
  */
 package pl.net.kaw.gomoku_droid.app;
 
-import java.util.Properties;
-
 import android.app.Application;
 
 
@@ -24,10 +22,8 @@ public class AppBase extends Application {
 	/** Instancja klasy */
 	private static AppBase INSTANCE;
 
-	/** Ustawienia z pliku properties */
-	private Properties properties;
-	
-	private boolean sound = IConfig.DEFAULT_ENABLE_SOUND;
+	/** Ustawienia gry */
+	private Settings settings;
 	
 	
 	@Override
@@ -35,7 +31,7 @@ public class AppBase extends Application {
 		
 	  super.onCreate();
 	  INSTANCE = this;	  
-	  properties = new PropertyReader(getBaseContext(), "app.properties").getProperties();	
+	  settings = new Settings(getBaseContext());
 	  
 	}
 
@@ -44,25 +40,9 @@ public class AppBase extends Application {
 	   return INSTANCE;
 	}
 	
-
 	
-	
-	public Properties getProperties() {
-	  return properties;
+	public Settings getSettings() {
+	  return settings;			
 	}
-
-
-	public boolean isSound() {
-		return sound;
-	}
-
-
-	public void setSound(boolean sound) {
-		this.sound = sound;
-	}
-	
-	
-	
-		
 	
 }
