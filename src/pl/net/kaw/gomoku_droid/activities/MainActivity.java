@@ -26,6 +26,11 @@ import pl.net.kaw.gomoku_droid.activities.gui.ModDialog;
 */
 public class MainActivity extends AppActivity {
 
+	/** Kod powrotu - zmiana języka */
+	private static int TRANSLATE_CODE = 99;
+	
+	/** Pozycje menu */
+	private TextView startItem, aboutItem, settingsItem, exitItem;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +40,13 @@ public class MainActivity extends AppActivity {
 	  setContentView(R.layout.main_activity);
 	  
 	  Typeface font = Typeface.createFromAsset(getAssets(),"fonts/vertiup2.ttf");
-	  TextView startItem = (TextView) findViewById(R.id.start_item);
+	  startItem = (TextView) findViewById(R.id.start_item);
 	  startItem.setTypeface(font);
-	  TextView aboutItem = (TextView) findViewById(R.id.about_item);
+	  aboutItem = (TextView) findViewById(R.id.about_item);
 	  aboutItem.setTypeface(font);
-	  TextView settingsItem = (TextView) findViewById(R.id.settings_item);
+	  settingsItem = (TextView) findViewById(R.id.settings_item);
 	  settingsItem.setTypeface(font);
-	  TextView exitItem = (TextView) findViewById(R.id.exit_item);
+	  exitItem = (TextView) findViewById(R.id.exit_item);
 	  exitItem.setTypeface(font);	
 	  
 	  startItem.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +80,11 @@ public class MainActivity extends AppActivity {
 		  @Override
 		  public void onClick(View view) {
 			  
-			  view.startAnimation(BUTTON_CLICK);
-			  startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+			 view.startAnimation(BUTTON_CLICK);
+			 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+			 startActivityForResult(intent, TRANSLATE_CODE);
 			 
-			}
+		  }
 		  
 	  });	  
 	  
@@ -97,6 +103,7 @@ public class MainActivity extends AppActivity {
 	  	  	
   }
 	
+	
 
 
     
@@ -113,6 +120,23 @@ public class MainActivity extends AppActivity {
 		}
 	 );			   
     	
+  }
+  
+  
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    
+    if (requestCode != TRANSLATE_CODE || resultCode != RESULT_OK) return;
+    
+	message(getString(R.string.settings_changed));
+
+	if (data.getBooleanExtra("lang", false)) { 
+      startItem.setText(R.string.menu_newgame);	  
+	  aboutItem.setText(R.string.menu_about);  
+	  settingsItem.setText(R.string.menu_settings);
+	  exitItem.setText(R.string.menu_exit);
+	}
+  
   }
 	
 

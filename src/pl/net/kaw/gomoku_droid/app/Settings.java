@@ -24,7 +24,7 @@ public class Settings extends SQLiteOpenHelper {
 	/** Tag: nazwa klasy */
 	private static final String TAG = Settings.class.getSimpleName();
 	/** Wersja bazy */
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 3;
 	/** Nazwa bazy */
 	private static final String DATABASE_NAME = "gomoku";
 	
@@ -139,6 +139,11 @@ public class Settings extends SQLiteOpenHelper {
 	 */
 	public void save(int colsAndRows, int piecesInRow, boolean computerStarts, boolean soundEnabled, int localeIndex) {
 		
+	  if (colsAndRows < IConfig.MIN_COLS_AND_ROWS || colsAndRows > IConfig.MAX_COLS_AND_ROWS) 
+		colsAndRows = this.colsAndRows;
+	  if (piecesInRow < IConfig.MIN_PIECES_IN_ROW || piecesInRow > IConfig.MAX_PIECES_IN_ROW) 
+		piecesInRow = this.piecesInRow;	  
+	  
 	  this.colsAndRows = colsAndRows;
 	  this.piecesInRow = piecesInRow;
 	  this.computerStarts = computerStarts;

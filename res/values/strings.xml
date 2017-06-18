@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Gomoku 4 Android</string>
+    <string name="app_name">Gomoku</string>
 	<string name="credits">Gomoku v. %s\nhttp://github.com/makaw/gomoku-droid</string>
 	
     <string name="menu_newgame">NEW GAME</string>
@@ -16,6 +16,15 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="ok"> OK </string>
+    
+    <string name="st_board_size">Board size:</string>
+    <string name="st_win_condition">Win condition:</string>
+    <string name="st_language">Language:</string>
+    <string name="st_computer_starts">Computer starts the game</string>
+    <string name="st_sounds_enabled">Game sounds enabled</string>
+    <string name="x_fields">%1$d × %1$d fields</string>
+    <string name="row_x_stones">row of %1$d stones</string>
+    <string name="settings_changed">Settings have been changed.</string>
     
     <string name="white_stones">White stones</string>
     <string name="black_stones">Black stones</string>

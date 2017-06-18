@@ -97,6 +97,11 @@ public class Language {
  	 return localeIndex;
    }
    
+   
+   public Locale getLocale() {
+	 return locale;
+   }
+   
 
    /**
     * Zwraca symbol lokalizacji (język + kraj)

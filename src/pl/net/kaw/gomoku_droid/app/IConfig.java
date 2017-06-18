@@ -44,6 +44,13 @@ public interface IConfig {
 	/** Domyślna lokalizacja (indeks) */
 	int DEFAULT_LOCALE_INDEX = 0;	
 	
+	/** Min współczynnik powiększenia planszy */
+	float MIN_ZOOM_FACTOR = 0.5f;	
+	/** Max współczynnik powiększenia planszy */
+	float MAX_ZOOM_FACTOR = 2.0f;	
+	/** Krok powiększenia planszy */
+	float ZOOM_FACTOR_STEP = 0.1f;
+	
 	/** Wersja aplikacji */
 	String VERSION = "0.0.6 (build %s)";
 	

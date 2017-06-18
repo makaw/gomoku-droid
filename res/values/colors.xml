@@ -7,5 +7,9 @@
     <color name="bg_toolbar">#555</color>
     <color name="bg_toolbar_border">#720001</color>
     <color name="fg_toolbar">#333</color>
-
+    <color name="std_text">#333</color>
+	<color name="spinner_item">#333</color>
+	<color name="spinner_dropdown_item_bg">#efefef</color>
+	<color name="spinner_dropdown_item_bg_pressed">#ccc</color>
+	
 </resources>

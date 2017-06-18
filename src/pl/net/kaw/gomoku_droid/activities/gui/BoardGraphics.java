@@ -17,6 +17,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
+import pl.net.kaw.gomoku_droid.app.AppBase;
 import pl.net.kaw.gomoku_droid.app.IConfig;
 
 
@@ -33,7 +34,7 @@ public class BoardGraphics extends View {
   private static final Point PX_BOARD_MARGIN = new Point(15, 28);
 	
   /** Ilość wierszy i kolumn planszy */
-  private int colsAndRows = IConfig.DEFAULT_COLS_AND_ROWS;
+  private final int colsAndRows = AppBase.getInstance().getSettings().getColsAndRows();
   /** Bieżący kontekst */
   private final Context context;
   /** Ustawienia rysowania */
@@ -44,7 +45,7 @@ public class BoardGraphics extends View {
   private Point pxBoardSize;
   /** Wysokość planszy -1 rząd */
   private int pxBoardSizeDecY;
-  
+  /** Współczynnik powiększenia planszy */
   private float zoomFactor = 1.0f;
   
 
@@ -83,13 +84,13 @@ public class BoardGraphics extends View {
     paint.setStyle(Style.FILL); 
     paint.setStrokeWidth(2.5f); 
     
-    paint.setTextSize(zoomFactor < 1 ? 14.0f : 16.0f);
+    paint.setTextSize(zoomFactor < 1 ? (zoomFactor <= 0.6 ? 12.0f : 14.0f) : 16.0f);
 
 	DisplayMetrics metrics = new DisplayMetrics();
     ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics); 
     
     pxField = (int)Math.round(metrics.widthPixels / colsAndRows * zoomFactor) * 2;
-   pxBoardSize = new Point(pxField * colsAndRows + PX_BOARD_MARGIN.x*2, 
+    pxBoardSize = new Point(pxField * colsAndRows + PX_BOARD_MARGIN.x*2, 
     		pxField * colsAndRows + PX_BOARD_MARGIN.y);
     pxBoardSizeDecY = PX_BOARD_MARGIN.y + (colsAndRows-1)*pxField;
     
@@ -116,7 +117,8 @@ public class BoardGraphics extends View {
    */
   public boolean isZoomEnabled(boolean out) {
 	  
-	return !((out && zoomFactor <= 0.6f) || (!out && zoomFactor >= 2.0f));  
+	return !((out && zoomFactor <= IConfig.MIN_ZOOM_FACTOR)
+			|| (!out && zoomFactor >= IConfig.MAX_ZOOM_FACTOR));  
 	  
   }
   
@@ -129,7 +131,7 @@ public class BoardGraphics extends View {
 	  
 	if (!isZoomEnabled(out)) return;
 	
-	zoomFactor += (out ? -1 : 1) * 0.2f;
+	zoomFactor += (out ? -1 : 1) * IConfig.ZOOM_FACTOR_STEP;
 		  
 	init();
 	invalidate();	  
@@ -145,6 +147,7 @@ public class BoardGraphics extends View {
 	super.onDraw(canvas);		
 		
 	int marg2 = (int)Math.round(PX_BOARD_MARGIN.x * zoomFactor * (zoomFactor > 1 ? 2 : 1));
+	if (zoomFactor <= 0.6) marg2 += 2;
 	
     // rysowanie planszy (siatka i podpisy)
     for (int i=0;i<colsAndRows;i++) {
@@ -153,7 +156,7 @@ public class BoardGraphics extends View {
     		  PX_BOARD_MARGIN.x+i*pxField+12, pxBoardSizeDecY, paint);
       
       canvas.drawText(Character.toString((char)('A' + i)), PX_BOARD_MARGIN.x+i*pxField+9,
-    		  pxBoardSizeDecY + 24, paint);
+    		  pxBoardSizeDecY + 22 + (zoomFactor <= 0.6 ? -3 : 0), paint);
       
       canvas.drawText(Character.toString((char)('A' + i)), PX_BOARD_MARGIN.x+i*pxField+9,
     		  13, paint);      

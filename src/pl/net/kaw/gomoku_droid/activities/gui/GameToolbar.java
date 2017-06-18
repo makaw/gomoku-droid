@@ -15,9 +15,9 @@ import pl.net.kaw.gomoku_droid.R;
 import pl.net.kaw.gomoku_droid.activities.AboutActivity;
 import pl.net.kaw.gomoku_droid.activities.AppActivity;
 import pl.net.kaw.gomoku_droid.activities.GameActivity;
-import pl.net.kaw.gomoku_droid.activities.GameTimer;
 import pl.net.kaw.gomoku_droid.app.AppBase;
 import pl.net.kaw.gomoku_droid.app.Helpers;
+import pl.net.kaw.gomoku_droid.app.SecTimer;
 
 
 /**
@@ -32,7 +32,7 @@ public class GameToolbar {
   /** Bieżąca aktywność */
   private final GameActivity activity;
   /** Licznik czasu gry */
-  private final GameTimer timer;
+  private final SecTimer timer;
   /** Zatrzymany stan licznika czasu */
   private long timerSecTmp = 0;
   
@@ -46,7 +46,7 @@ public class GameToolbar {
 	this.activity = activity;	
 	TextView clockView = (TextView) activity.findViewById(R.id.gtb_clock);
 	clockView.setText("00:00:00");
-	timer = new GameTimer(clockView);
+	timer = new SecTimer(clockView);
 	  
   }
   

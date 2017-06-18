@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Gomoku 4 Android</string>
-	<string name="credits">Gomoku v. %s\nhttp://github.com/makaw/gomoku-droid</string>
-	
     <string name="menu_newgame">NOWA GRA</string>
     <string name="menu_about">INFORMACJE</string>
     <string name="menu_settings">USTAWIENIA</string>
@@ -16,6 +13,15 @@
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="ok"> OK </string>
+    
+    <string name="st_board_size">Wymiary planszy:</string>
+    <string name="st_win_condition">Warunek wygranej:</string>
+    <string name="st_language">Język:</string>
+    <string name="st_computer_starts">Komputer rozpoczyna grę</string>
+    <string name="st_sounds_enabled">Dźwięki w czasie gry włączone</string>    
+    <string name="x_fields">%1$d × %1$d pól</string>
+    <string name="row_x_stones">rząd %1$d kamieni</string>
+    <string name="settings_changed">Ustawienia zostały zmienione.</string>
     
     <string name="white_stones">Białe kamienie</string>
     <string name="black_stones">Czarne kamienie</string>

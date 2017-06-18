@@ -7,21 +7,28 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/main_nob"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:src="@drawable/main_nob" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
-        android:layout_marginTop="140dp"
         android:orientation="vertical"
-        android:padding="20dp" >
+        android:padding="20dp"
+        android:weightSum="10" >
+
+        <View 
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txt_about"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.3"
             android:autoLink="web"
             android:linksClickable="true"
             android:text="@string/credits"
@@ -38,7 +45,7 @@
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="5.8"
             android:fillViewport="true" >
 
             <TextView
@@ -60,7 +67,7 @@
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:layout_weight="1"
+            android:layout_weight="1.4"
             android:text="@string/menu_back"
             android:textSize="18sp" />
     </LinearLayout>

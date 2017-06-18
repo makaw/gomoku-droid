@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_pressed="true">
+    <solid android:color="@color/spinner_dropdown_item_bg_pressed" />
+</item>
+<item android:state_selected="true">
+    <solid android:color="@color/spinner_dropdown_item_bg_pressed" />
+</item>
+<item>
+  <solid android:color="@color/spinner_dropdown_item_bg" />
+</item>       
+</selector>

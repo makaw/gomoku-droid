@@ -8,8 +8,7 @@ package pl.net.kaw.gomoku_droid.activities.gui;
 import java.util.concurrent.Callable;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -17,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import pl.net.kaw.gomoku_droid.R;
 import pl.net.kaw.gomoku_droid.activities.AppActivity;
+import pl.net.kaw.gomoku_droid.app.IConfig;
 
 
 
@@ -38,7 +38,7 @@ public class ModDialog extends Dialog {
    * @param callable Metoda wykonywana w listenerze przycisku "Tak"
    * @param <T> Typ zwracany przez metodę callable
    */
-  private <T> ModDialog(Context context, String title, String message,
+  private <T> ModDialog(final AppActivity context, String title, String message,
 		  int icon, final Callable<T> callable) {
 	  
     super(context);
@@ -60,17 +60,14 @@ public class ModDialog extends Dialog {
 		  
 		@Override
 		public void onClick(View v) {
-		  v.startAnimation(AppActivity.BUTTON_CLICK);
-		  new Handler().postDelayed(new Runnable() {			
-			@Override
-			public void run() {
-			  try {
-				callable.call();
-			  }
-			  catch (Exception e) {}
-			}
-		  }, 100); 		  
+		  v.startAnimation(AppActivity.BUTTON_CLICK);		  
 		  ModDialog.this.dismiss();
+		  try {
+		    callable.call();
+		  }
+		  catch (Exception e) {
+			if (IConfig.DEBUG) Log.e(context.getTag(), "Callable e: " + e.getMessage());  
+		  }
 		}
 		
 	  });
@@ -107,7 +104,7 @@ public class ModDialog extends Dialog {
    * @param callable Metoda wykonywana w listenerze przycisku "Tak"
    * @param <T> Typ zwracany przez metodę callable
    */
-  public static <T> void showConfirmDialog(Context context, String message, Callable<T> callable) {
+  public static <T> void showConfirmDialog(AppActivity context, String message, Callable<T> callable) {
 	  
 	 new ModDialog(context, context.getString(R.string.confirm), message,
 			 R.drawable.ic_dialog_question, callable).show(); 
@@ -122,7 +119,7 @@ public class ModDialog extends Dialog {
    * @param icon Ikona nagłówka
    * @param message Treść wiadomości
    */
-  public static void showInfoDialog(Context context, String title, int icon, String message) {
+  public static void showInfoDialog(AppActivity context, String title, int icon, String message) {
 	  
 	 new ModDialog(context, title, message, icon, null).show(); 
 	  

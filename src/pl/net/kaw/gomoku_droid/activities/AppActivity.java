@@ -8,8 +8,10 @@ package pl.net.kaw.gomoku_droid.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
@@ -94,18 +96,6 @@ public abstract class AppActivity extends Activity {
 	}
 
 	
-	/**
-	 * Wyświetla okienko z błędem
-	 * 
-	 * @param error
-	 *            Komunikat
-	 */
-	public void errorMessage(String error) {
-
-		message(error);
-		doPostErrorMessage();
-
-	}
 
 	public boolean isInFront() {
 		return inFront;
@@ -127,11 +117,20 @@ public abstract class AppActivity extends Activity {
 
 	}
 
+	
 	/**
-	 * Do wykonania po wyświetleniu okna z błędem
+	 * Zwraca wymiary ekranu
+	 * @return j.w.
 	 */
-	protected void doPostErrorMessage() {
+	public Point getDisplaySize() {
+		  
+	  DisplayMetrics displayMetrics = new DisplayMetrics();
+	  getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+	  return new Point(displayMetrics.widthPixels, displayMetrics.heightPixels);
+		
 	}
+	
+	
 
 	/**
 	 * Ukrycie klawiatury

@@ -56,7 +56,7 @@ public class AboutActivity extends AppActivity {
         try {
           ((TextView) findViewById(R.id.txt_about_rules)).setText(loadRules());
         }
-        catch (Exception e) {}
+        catch (Exception e) {}                
         
     }
     
