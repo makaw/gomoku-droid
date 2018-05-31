@@ -193,5 +193,14 @@ public class Settings extends SQLiteOpenHelper {
 		
 	}
 	
+	
+
+	  
+	public int getFieldsAmount() {
+	  	
+	  return colsAndRows*colsAndRows;
+	     	  
+	}
+	
 
 }

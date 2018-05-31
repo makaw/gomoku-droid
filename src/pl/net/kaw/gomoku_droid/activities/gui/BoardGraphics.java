@@ -15,8 +15,12 @@ import android.graphics.Point;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.WindowManager;
+import pl.net.kaw.gomoku_droid.activities.GameActivity;
 import pl.net.kaw.gomoku_droid.app.AppBase;
 import pl.net.kaw.gomoku_droid.app.IConfig;
 
@@ -31,7 +35,7 @@ import pl.net.kaw.gomoku_droid.app.IConfig;
 public class BoardGraphics extends View {
     
   /** Dodatkowe marginesy planszy */
-  private static final Point PX_BOARD_MARGIN = new Point(15, 28);
+  private static final Point PX_BOARD_MARGIN = new Point(15, 28);  
 	
   /** Ilość wierszy i kolumn planszy */
   private final int colsAndRows = AppBase.getInstance().getSettings().getColsAndRows();
@@ -47,31 +51,83 @@ public class BoardGraphics extends View {
   private int pxBoardSizeDecY;
   /** Współczynnik powiększenia planszy */
   private float zoomFactor = 1.0f;
+  /** Rozpoznawanie gestów */
+  private final ScaleGestureDetector mScaleGestureDetector;
+  /** Czy pierwszy palec w górze (rozpoznawanie gestów) */
+  public boolean firstFingerUp = true;
+  /** Czy drugi palec w górze (rozpoznawanie gestów) */
+  public boolean secondFingerUp = true;
+    
   
-
-  public BoardGraphics(Context context) {
-      
-    super(context);
-    this.context = context;
-    init();
-    
-  }
-
-  public BoardGraphics(Context context, AttributeSet attrs) {
-      
-	super(context, attrs);
-    this.context = context;
-    init();
-    
-  }
-
   public BoardGraphics(Context context, AttributeSet attrs, int defStyle) {
     
 	super(context, attrs, defStyle);
-    this.context = context;
-    init();
+    this.context = context;    
+    init();    
+    
+	mScaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.SimpleOnScaleGestureListener() {		  
+	   @Override
+	   public boolean onScale(ScaleGestureDetector scaleGestureDetector){	    	
+		  float factor = scaleGestureDetector.getScaleFactor();
+		  boolean out = factor < 1.0;
+		  zoom(out, Math.abs(1.0f - factor) * (out ? 10.0f : 6.0f));
+		  return true;	    				  
+		}	    			
+	});
+		    
+
+	setOnTouchListener(new View.OnTouchListener() {		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+						  
+		  mScaleGestureDetector.onTouchEvent(event);
+			
+	      switch (event.getAction()) {
+	         case MotionEvent.ACTION_DOWN:
+	           firstFingerUp = false;
+	           break;
+	         case MotionEvent.ACTION_POINTER_DOWN:
+	           secondFingerUp = false;
+	           break;
+	         case MotionEvent.ACTION_UP:  
+	           if (secondFingerUp) v.performClick();
+	           firstFingerUp = true;
+	           secondFingerUp = true;
+	           break;
+	         case MotionEvent.ACTION_POINTER_UP:
+	           if (firstFingerUp) v.performClick();
+		       firstFingerUp = true;
+		       secondFingerUp = true;	           	          	           
+	           break;
+	      }	        
+		  
+		  return true;
+			
+		}
+			
+	  });	  
+		      
     
   }
+    
+
+  public BoardGraphics(Context context) {      
+    this(context, null, 0);    
+  }
+
+  public BoardGraphics(Context context, AttributeSet attrs) {      
+	this(context, attrs, 0);    
+  }  
+  
+  
+  
+  // TODO
+  @Override
+  public boolean performClick() {
+	Log.d(getClass().getSimpleName(), "click!");
+	return super.performClick();
+  }
+	
   
   
   /**
@@ -110,35 +166,47 @@ public class BoardGraphics extends View {
   }
   
   
+  
   /**
-   * Czy można zmienić powiększenie planszy
+   * Czy można zmienić powiększenie planszy (przyciski)
    * @param out True=zmniejszenie
    * @return j.w.
    */
-  public boolean isZoomEnabled(boolean out) {
-	  
-	return !((out && zoomFactor <= IConfig.MIN_ZOOM_FACTOR)
-			|| (!out && zoomFactor >= IConfig.MAX_ZOOM_FACTOR));  
-	  
+  public boolean isZoomEnabled(boolean out) {	  
+	float factor = zoomFactor + (out ? -1 : 1) * IConfig.ZOOM_FACTOR_STEP;
+	return factor >= IConfig.MIN_ZOOM_FACTOR && factor <= IConfig.MAX_ZOOM_FACTOR;  	  
   }
   
   
   /**
    * Zmiana powiększenia planszy
    * @param out True=zmniejszenie
+   * @param zoomFactorStep Krok zmiany
    */
-  public void zoom(boolean out) {
+  private void zoom(boolean out, float zoomFactorStep) {
 	  
-	if (!isZoomEnabled(out)) return;
+	float factor = zoomFactor + (out ? -1 : 1) * zoomFactorStep;  
+	if (factor < IConfig.MIN_ZOOM_FACTOR || factor > IConfig.MAX_ZOOM_FACTOR) return;  
 	
-	zoomFactor += (out ? -1 : 1) * IConfig.ZOOM_FACTOR_STEP;
-		  
+	zoomFactor = factor;
 	init();
 	invalidate();	  
-	  
+	
+	// TODO
+	((GameActivity)context).getGameToolbar().tryToEnableZoomButtons();
+	
   }
   
   
+  /**
+   * Zmiana powiększenia planszy (domyślny krok)
+   * @param out True=zmniejszenie
+   */
+  public void zoom(boolean out) {	  
+	zoom(out, IConfig.ZOOM_FACTOR_STEP);  	  
+  }
+    
+      
 
   @SuppressLint("DrawAllocation")
   @Override
@@ -146,7 +214,7 @@ public class BoardGraphics extends View {
     
 	super.onDraw(canvas);		
 		
-	int marg2 = (int)Math.round(PX_BOARD_MARGIN.x * zoomFactor * (zoomFactor > 1 ? 2 : 1));
+	int marg2 = (int)Math.round(PX_BOARD_MARGIN.x * zoomFactor * (zoomFactor > 1 ? 2 : 1)) + 3;
 	if (zoomFactor <= 0.6) marg2 += 2;
 	
     // rysowanie planszy (siatka i podpisy)
@@ -164,11 +232,11 @@ public class BoardGraphics extends View {
       canvas.drawLine(PX_BOARD_MARGIN.x+12, PX_BOARD_MARGIN.y+i*pxField,
     		  PX_BOARD_MARGIN.x+(colsAndRows-1)*pxField+12, PX_BOARD_MARGIN.y+i*pxField, paint);
       
-      canvas.drawText(Integer.toString(colsAndRows-i), PX_BOARD_MARGIN.x-(i<6 ? 13:11), 
+      canvas.drawText(Integer.toString(colsAndRows-i), PX_BOARD_MARGIN.x-(colsAndRows-i > 9 ? 14:11), 
     		  PX_BOARD_MARGIN.y+i*pxField+4, paint);
       
       canvas.drawText(Integer.toString(colsAndRows-i), 
-    		  pxBoardSize.x - marg2 -(i<6 ? 6 : 0), 
+    		  pxBoardSize.x - marg2 -(colsAndRows-i > 9 ? 6 : 0), 
     		  PX_BOARD_MARGIN.y+i*pxField+4, paint);      
 
     }
@@ -187,6 +255,6 @@ public class BoardGraphics extends View {
     }
    
   }
- 
+  
   
 }

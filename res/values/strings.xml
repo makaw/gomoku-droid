@@ -8,8 +8,8 @@
     <string name="menu_about">ABOUT GOMOKU</string>
     <string name="menu_settings">SETTINGS</string>
     <string name="menu_exit">EXIT</string>    
-    <string name="menu_back">◀ BACK</string>
-    <string name="menu_save">✔ SAVE</string>
+    <string name="menu_back">← BACK</string>
+    <string name="menu_save">✓ SAVE</string>
     
     <string name="confirm">Please confirm</string>
     <string name="confirm_quit">Are you sure you want to exit?</string>

@@ -31,25 +31,6 @@ import pl.net.kaw.gomoku_droid.app.Settings;
 public class SettingsActivity extends AppActivity {
 	
 	
-	class SpinData {
-	  int id;
-	  String name;
-	  
-	  public SpinData(int id, String name) {
-		this.id = id;
-		this.name = name;
-	  }
-	  
-	  @Override
-	  public String toString() {
-		return name;  
-	  }
-	}
-	
-	
-	
-	
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	

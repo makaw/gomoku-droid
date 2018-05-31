@@ -13,9 +13,13 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    <style name="AppTheme" parent="AppBaseTheme">        
+        
     </style>
+    
+    <style name="SpinnerStyle" parent="AppBaseTheme">        
+        <item name="android:selectableItemBackground">@drawable/spinner_bg</item>
+    </style>    
 
     <style name="MenuFont">
         <item name="android:textSize">25sp</item>
@@ -27,6 +31,7 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

@@ -129,6 +129,17 @@ public class GameToolbar {
 	  	  
   }
   
+  
+  public void tryToEnableZoomButtons() {
+	 try {
+	   Button zoomInBtn = (Button) activity.findViewById(R.id.gtb_zoom_in_btn);
+	   Button zoomOutBtn = (Button) activity.findViewById(R.id.gtb_zoom_out_btn);
+	   enableZoomBtn(zoomInBtn, zoomOutBtn);
+	 }
+	 catch (NullPointerException e) { }
+  }
+  
+  
   /**
    * Blokada przycisków powiększenia
    * @param zoomInBtn Przycisk zoom+

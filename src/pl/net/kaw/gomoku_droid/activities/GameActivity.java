@@ -37,15 +37,21 @@ public class GameActivity extends AppActivity {
       
       boardGraphics = (BoardGraphics) findViewById(R.id.board);
       
+      
       toolbar = new GameToolbar(this);
       toolbar.init();
-      toolbar.startTimer();
+      toolbar.startTimer();      
         
     }   
     
     
     public BoardGraphics getBoardGraphics() {
       return boardGraphics;
+    }
+    
+    
+    public GameToolbar getGameToolbar() {
+      return toolbar;
     }
     
     

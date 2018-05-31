@@ -5,8 +5,8 @@
     <string name="menu_about">INFORMACJE</string>
     <string name="menu_settings">USTAWIENIA</string>
     <string name="menu_exit">KONIEC</string>    
-    <string name="menu_back">◀ POWRÔT</string>
-    <string name="menu_save">✔ ZAPISZ</string>
+    <string name="menu_back">← POWRÔT</string>
+    <string name="menu_save">✓ ZAPISZ</string>
     
     <string name="confirm">Potwierdzenie</string>
     <string name="confirm_quit">Czy na pewno zakończyć działanie aplikacji?</string>

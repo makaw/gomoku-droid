@@ -44,14 +44,18 @@
                     android:textColor="@color/std_text"
                     android:textSize="14sp" />
 
+                 <!-- 
+    		       Crash w Android 7: android:dropDownSelector="@drawable/spinner_bg"
+    		       przeniesione do values/styles
+	         	 -->
                 <Spinner
                     android:id="@+id/st_board_size"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.4"
                     android:textSize="14sp" 
-                    android:dropDownSelector="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown" />
+                    android:spinnerMode="dropdown"
+                    style="SpinnerStyle" />
             </LinearLayout>
 
             <LinearLayout
@@ -74,8 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.4"
                     android:textSize="14sp" 
-                    android:dropDownSelector="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown" />
+                    android:spinnerMode="dropdown" 
+                    style="SpinnerStyle" />
             </LinearLayout>
 
 
@@ -99,8 +103,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.4"
                     android:textSize="14sp" 
-                    android:dropDownSelector="@drawable/spinner_bg"
-                    android:spinnerMode="dropdown" />
+                    android:spinnerMode="dropdown" 
+                    style="SpinnerStyle" />
             </LinearLayout>
             
             
