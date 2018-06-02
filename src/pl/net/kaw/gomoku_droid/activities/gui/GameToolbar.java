@@ -5,8 +5,6 @@
  */
 package pl.net.kaw.gomoku_droid.activities.gui;
 
-import com.example.android.cheatsheet.CheatSheet;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +15,7 @@ import pl.net.kaw.gomoku_droid.activities.AppActivity;
 import pl.net.kaw.gomoku_droid.activities.GameActivity;
 import pl.net.kaw.gomoku_droid.app.AppBase;
 import pl.net.kaw.gomoku_droid.app.Helpers;
+import pl.net.kaw.gomoku_droid.app.IConfig;
 import pl.net.kaw.gomoku_droid.app.SecTimer;
 
 
@@ -96,7 +95,6 @@ public class GameToolbar {
 		public void onClick(View v) {
 		  v.startAnimation(AppActivity.BUTTON_CLICK);
 		  activity.getBoardGraphics().zoom(false);
-		  enableZoomBtn(zoomInBtn, zoomOutBtn);
 		}
 	});
     
@@ -105,7 +103,6 @@ public class GameToolbar {
 		public void onClick(View v) {
 		  v.startAnimation(AppActivity.BUTTON_CLICK);
 		  activity.getBoardGraphics().zoom(true);
-		  enableZoomBtn(zoomInBtn, zoomOutBtn);
 		}
 	});
     
@@ -117,40 +114,35 @@ public class GameToolbar {
 		activity.message(activity.getString(R.string.not_implemented));
 	  }
 	});
-    
-    
-    // tooltips
-    CheatSheet.setup(zoomInBtn);
-    CheatSheet.setup(zoomOutBtn);
-    CheatSheet.setup(helpBtn);
-    CheatSheet.setup(soundBtn);
-    CheatSheet.setup(restartBtn);
-    CheatSheet.setup(backBtn);    
-	  	  
-  }
-  
-  
-  public void tryToEnableZoomButtons() {
-	 try {
-	   Button zoomInBtn = (Button) activity.findViewById(R.id.gtb_zoom_in_btn);
-	   Button zoomOutBtn = (Button) activity.findViewById(R.id.gtb_zoom_out_btn);
-	   enableZoomBtn(zoomInBtn, zoomOutBtn);
-	 }
-	 catch (NullPointerException e) { }
+   
   }
   
   
   /**
-   * Blokada przycisków powiększenia
-   * @param zoomInBtn Przycisk zoom+
-   * @param zoomOutBtn Przycisk zoom-
+   * Blokada przycisków zoom +-
+   * @param factor Aktualny współczynnik zoom
    */
-  private void enableZoomBtn(Button zoomInBtn, Button zoomOutBtn) {
-
-	enableBtn(zoomInBtn, activity.getBoardGraphics().isZoomEnabled(false));
-	enableBtn(zoomOutBtn, activity.getBoardGraphics().isZoomEnabled(true));
-	
+  public void tryToEnableZoomButtons(float factor) {	  	  	  
+	 Button zoomInBtn = (Button) activity.findViewById(R.id.gtb_zoom_in_btn);
+	 Button zoomOutBtn = (Button) activity.findViewById(R.id.gtb_zoom_out_btn);
+	 enableBtn(zoomInBtn, isZoomEnabled(false, factor));
+	 enableBtn(zoomOutBtn, isZoomEnabled(true, factor));
   }
+  
+  
+  
+  
+  /**
+   * Czy można zmienić powiększenie planszy (przyciski)
+   * @param out True=zmniejszenie
+   * @param factor Bieżący zoom
+   * @return j.w.
+   */
+  private boolean isZoomEnabled(boolean out, float factor) {	  
+	float f = factor + (out ? -1.0f : 1.0f) * IConfig.ZOOM_FACTOR_STEP;
+	return f >= IConfig.MIN_ZOOM_FACTOR && f <= IConfig.MAX_ZOOM_FACTOR;  	  
+  }
+  
   
   /**
    * Blokada przycisku

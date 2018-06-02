@@ -52,6 +52,6 @@ public interface IConfig {
 	float ZOOM_FACTOR_STEP = 0.1f;
 	
 	/** Wersja aplikacji */
-	String VERSION = "0.0.6 (build %s)";
+	String VERSION = "0.0.7 (build %s)";
 	
 }

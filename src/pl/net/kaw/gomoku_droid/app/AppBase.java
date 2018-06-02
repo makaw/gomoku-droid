@@ -25,6 +25,8 @@ public class AppBase extends Application {
 	/** Ustawienia gry */
 	private Settings settings;
 	
+	private final AppEventBus eventBus = new AppEventBus();
+	
 	
 	@Override
 	public void onCreate() {
@@ -38,6 +40,11 @@ public class AppBase extends Application {
 	
 	public static synchronized AppBase getInstance() {
 	   return INSTANCE;
+	}
+	
+	
+	public static synchronized AppEventBus getEventBus() {
+		return INSTANCE.eventBus;
 	}
 	
 	

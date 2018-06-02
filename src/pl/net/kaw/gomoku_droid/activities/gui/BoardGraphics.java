@@ -20,9 +20,10 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.WindowManager;
-import pl.net.kaw.gomoku_droid.activities.GameActivity;
 import pl.net.kaw.gomoku_droid.app.AppBase;
+import pl.net.kaw.gomoku_droid.app.AppEventBus;
 import pl.net.kaw.gomoku_droid.app.IConfig;
+import pl.net.kaw.gomoku_droid.events.ZoomChangedEvent;
 
 
 /**
@@ -164,18 +165,7 @@ public class BoardGraphics extends View {
 	setMeasuredDimension(pxBoardSize.x, pxBoardSize.y);
 	  
   }
-  
-  
-  
-  /**
-   * Czy można zmienić powiększenie planszy (przyciski)
-   * @param out True=zmniejszenie
-   * @return j.w.
-   */
-  public boolean isZoomEnabled(boolean out) {	  
-	float factor = zoomFactor + (out ? -1 : 1) * IConfig.ZOOM_FACTOR_STEP;
-	return factor >= IConfig.MIN_ZOOM_FACTOR && factor <= IConfig.MAX_ZOOM_FACTOR;  	  
-  }
+     
   
   
   /**
@@ -185,15 +175,14 @@ public class BoardGraphics extends View {
    */
   private void zoom(boolean out, float zoomFactorStep) {
 	  
-	float factor = zoomFactor + (out ? -1 : 1) * zoomFactorStep;  
+	float factor = zoomFactor + (out ? -1.0f : 1.0f) * zoomFactorStep;  
 	if (factor < IConfig.MIN_ZOOM_FACTOR || factor > IConfig.MAX_ZOOM_FACTOR) return;  
 	
 	zoomFactor = factor;
 	init();
 	invalidate();	  
 	
-	// TODO
-	((GameActivity)context).getGameToolbar().tryToEnableZoomButtons();
+	AppEventBus.post(new ZoomChangedEvent(zoomFactor));
 	
   }
   
@@ -236,8 +225,7 @@ public class BoardGraphics extends View {
     		  PX_BOARD_MARGIN.y+i*pxField+4, paint);
       
       canvas.drawText(Integer.toString(colsAndRows-i), 
-    		  pxBoardSize.x - marg2 -(colsAndRows-i > 9 ? 6 : 0), 
-    		  PX_BOARD_MARGIN.y+i*pxField+4, paint);      
+    		  pxBoardSize.x - marg2 -(colsAndRows-i > 9 ? 12 : 6),  PX_BOARD_MARGIN.y+i*pxField+4, paint);      
 
     }
    

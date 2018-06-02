@@ -8,11 +8,15 @@ package pl.net.kaw.gomoku_droid.activities;
 
 import java.util.concurrent.Callable;
 
+import com.google.common.eventbus.Subscribe;
+
 import android.os.Bundle;
 import pl.net.kaw.gomoku_droid.R;
 import pl.net.kaw.gomoku_droid.activities.gui.BoardGraphics;
 import pl.net.kaw.gomoku_droid.activities.gui.GameToolbar;
 import pl.net.kaw.gomoku_droid.activities.gui.ModDialog;
+import pl.net.kaw.gomoku_droid.app.AppEventBus;
+import pl.net.kaw.gomoku_droid.events.ZoomChangedEvent;
 
 
 /**
@@ -41,6 +45,8 @@ public class GameActivity extends AppActivity {
       toolbar = new GameToolbar(this);
       toolbar.init();
       toolbar.startTimer();      
+      
+      AppEventBus.register(this);
         
     }   
     
@@ -52,6 +58,12 @@ public class GameActivity extends AppActivity {
     
     public GameToolbar getGameToolbar() {
       return toolbar;
+    }
+    
+    
+    @Subscribe
+    public void noticeZoomChange(final ZoomChangedEvent event) {
+      toolbar.tryToEnableZoomButtons(event.getFactor());
     }
     
     
@@ -97,6 +109,7 @@ public class GameActivity extends AppActivity {
     public void onDestroy() {
     	
       toolbar.stopTimer();	
+      AppEventBus.unregister(this);
       super.onDestroy();	
       
     }

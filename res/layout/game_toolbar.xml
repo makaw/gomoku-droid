@@ -148,9 +148,9 @@
                 android:id="@+id/gtb_clock"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:paddingBottom="2dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
+                android:paddingBottom="2dp"
                 android:textColor="@color/fg_toolbar"
                 android:textSize="12sp" />
         </LinearLayout>
