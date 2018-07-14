@@ -15,7 +15,6 @@ import android.graphics.Point;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -23,7 +22,9 @@ import android.view.WindowManager;
 import pl.net.kaw.gomoku_droid.app.AppBase;
 import pl.net.kaw.gomoku_droid.app.AppEventBus;
 import pl.net.kaw.gomoku_droid.app.IConfig;
+import pl.net.kaw.gomoku_droid.events.PlayerMoveEvent;
 import pl.net.kaw.gomoku_droid.events.ZoomChangedEvent;
+import pl.net.kaw.gomoku_droid.game.BoardField;
 
 
 /**
@@ -53,11 +54,17 @@ public class BoardGraphics extends View {
   /** Współczynnik powiększenia planszy */
   private float zoomFactor = 1.0f;
   /** Rozpoznawanie gestów */
-  private final ScaleGestureDetector mScaleGestureDetector;
-  /** Czy pierwszy palec w górze (rozpoznawanie gestów) */
-  public boolean firstFingerUp = true;
-  /** Czy drugi palec w górze (rozpoznawanie gestów) */
-  public boolean secondFingerUp = true;
+  private final ScaleGestureDetector scaleGestureDetector;
+  
+  private static final int INVALID_POINTER_ID = -1;
+  private static final int CLICK_ACTION_THRESHOLD = 200;
+
+  /** Ostatnie dotknięcie X */
+  private float touchX;
+  /** Ostatnie dotknięcie Y */
+  private float touchY;
+  
+  private int activePointerId = INVALID_POINTER_ID;
     
   
   public BoardGraphics(Context context, AttributeSet attrs, int defStyle) {
@@ -66,12 +73,10 @@ public class BoardGraphics extends View {
     this.context = context;    
     init();    
     
-	mScaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.SimpleOnScaleGestureListener() {		  
+	scaleGestureDetector = new ScaleGestureDetector(context, new ScaleGestureDetector.SimpleOnScaleGestureListener() {		  
 	   @Override
-	   public boolean onScale(ScaleGestureDetector scaleGestureDetector){	    	
-		  float factor = scaleGestureDetector.getScaleFactor();
-		  boolean out = factor < 1.0;
-		  zoom(out, Math.abs(1.0f - factor) * (out ? 10.0f : 6.0f));
+	   public boolean onScale(ScaleGestureDetector scaleGestureDetector){	    			  
+		  zoom(scaleGestureDetector.getScaleFactor());
 		  return true;	    				  
 		}	    			
 	});
@@ -81,33 +86,49 @@ public class BoardGraphics extends View {
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
 						  
-		  mScaleGestureDetector.onTouchEvent(event);
-			
-	      switch (event.getAction()) {
-	         case MotionEvent.ACTION_DOWN:
-	           firstFingerUp = false;
-	           break;
-	         case MotionEvent.ACTION_POINTER_DOWN:
-	           secondFingerUp = false;
-	           break;
-	         case MotionEvent.ACTION_UP:  
-	           if (secondFingerUp) v.performClick();
-	           firstFingerUp = true;
-	           secondFingerUp = true;
-	           break;
-	         case MotionEvent.ACTION_POINTER_UP:
-	           if (firstFingerUp) v.performClick();
-		       firstFingerUp = true;
-		       secondFingerUp = true;	           	          	           
-	           break;
-	      }	        
+		  scaleGestureDetector.onTouchEvent(event);
+				    
+		  switch (event.getAction() & MotionEvent.ACTION_MASK) {
 		  
-		  return true;
-			
+		    case MotionEvent.ACTION_DOWN: 
+		        touchX = event.getX();
+		        touchY = event.getY();	
+		        activePointerId = event.getPointerId(0);
+		        break;		   		        
+		    
+		        
+		    case MotionEvent.ACTION_UP: 
+		        
+		       activePointerId = INVALID_POINTER_ID;
+		       if (isAClick(touchX, event.getX(), touchY, event.getY())) { 
+		        	
+		          v.performClick();
+		        			       
+		       }
+		        		        
+		       break;
+		    
+		        
+		    case MotionEvent.ACTION_CANCEL: 
+		        activePointerId = INVALID_POINTER_ID;
+		        break;
+		    
+		    
+		    case MotionEvent.ACTION_POINTER_UP: 
+		        int currPointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) 
+		                >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;		       
+		        if (event.getPointerId(currPointerIndex) == activePointerId) {	
+		          activePointerId = event.getPointerId(currPointerIndex == 0 ? 1 : 0);		           
+		        }
+		        break;
+		    
+		    }
+		    
+		    return true;
+		    
 		}
-			
-	  });	  
-		      
+		
+	});
     
   }
     
@@ -122,11 +143,17 @@ public class BoardGraphics extends View {
   
   
   
-  // TODO
+  
   @Override
   public boolean performClick() {
-	Log.d(getClass().getSimpleName(), "click!");
+		   
+    try {
+	  AppEventBus.post(new PlayerMoveEvent(getFieldCoords()));
+    }
+    catch (Exception e) { }
+    
 	return super.performClick();
+	
   }
 	
   
@@ -176,9 +203,24 @@ public class BoardGraphics extends View {
   private void zoom(boolean out, float zoomFactorStep) {
 	  
 	float factor = zoomFactor + (out ? -1.0f : 1.0f) * zoomFactorStep;  
-	if (factor < IConfig.MIN_ZOOM_FACTOR || factor > IConfig.MAX_ZOOM_FACTOR) return;  
+	zoomFactor = Math.max(IConfig.MIN_ZOOM_FACTOR, Math.min(factor, IConfig.MAX_ZOOM_FACTOR));
 	
-	zoomFactor = factor;
+	init();
+	invalidate();	  
+	
+	AppEventBus.post(new ZoomChangedEvent(zoomFactor));
+	
+  }
+  
+  
+  /**
+   * Dowolna zmiana powiększenia planszy
+   * @param factor Czynnik zmiany
+   */
+  private void zoom(float factor) {
+	  
+	factor = zoomFactor * factor;
+	zoomFactor = Math.max(IConfig.MIN_ZOOM_FACTOR, Math.min(factor, IConfig.MAX_ZOOM_FACTOR));
 	init();
 	invalidate();	  
 	
@@ -194,6 +236,21 @@ public class BoardGraphics extends View {
   public void zoom(boolean out) {	  
 	zoom(out, IConfig.ZOOM_FACTOR_STEP);  	  
   }
+  
+  
+  /**
+   * Wykrywanie kliknięcia
+   * @param startX Wsp. X początku akcji
+   * @param endX Wsp. X końca akcji
+   * @param startY Wsp. Y początku akcji
+   * @param endY Wsp. Y końca akcji
+   * @return Czy kliknięcie
+   */
+  private boolean isAClick(float startX, float endX, float startY, float endY) {
+      float differenceX = Math.abs(startX - endX);
+      float differenceY = Math.abs(startY - endY);
+      return !(differenceX > CLICK_ACTION_THRESHOLD/* =5 */ || differenceY > CLICK_ACTION_THRESHOLD);
+  } 
     
       
 
@@ -212,19 +269,19 @@ public class BoardGraphics extends View {
       canvas.drawLine(PX_BOARD_MARGIN.x+i*pxField+12, PX_BOARD_MARGIN.y,
     		  PX_BOARD_MARGIN.x+i*pxField+12, pxBoardSizeDecY, paint);
       
-      canvas.drawText(Character.toString((char)('A' + i)), PX_BOARD_MARGIN.x+i*pxField+9,
+      canvas.drawText(BoardField.getLabA(i), PX_BOARD_MARGIN.x+i*pxField+9,
     		  pxBoardSizeDecY + 22 + (zoomFactor <= 0.6 ? -3 : 0), paint);
       
-      canvas.drawText(Character.toString((char)('A' + i)), PX_BOARD_MARGIN.x+i*pxField+9,
+      canvas.drawText(BoardField.getLabA(i), PX_BOARD_MARGIN.x+i*pxField+9,
     		  13, paint);      
     
       canvas.drawLine(PX_BOARD_MARGIN.x+12, PX_BOARD_MARGIN.y+i*pxField,
     		  PX_BOARD_MARGIN.x+(colsAndRows-1)*pxField+12, PX_BOARD_MARGIN.y+i*pxField, paint);
       
-      canvas.drawText(Integer.toString(colsAndRows-i), PX_BOARD_MARGIN.x-(colsAndRows-i > 9 ? 14:11), 
+      canvas.drawText(BoardField.getLabB(i, colsAndRows), PX_BOARD_MARGIN.x-(colsAndRows-i > 9 ? 14:11), 
     		  PX_BOARD_MARGIN.y+i*pxField+4, paint);
       
-      canvas.drawText(Integer.toString(colsAndRows-i), 
+      canvas.drawText(BoardField.getLabB(i, colsAndRows), 
     		  pxBoardSize.x - marg2 -(colsAndRows-i > 9 ? 12 : 6),  PX_BOARD_MARGIN.y+i*pxField+4, paint);      
 
     }
@@ -242,6 +299,24 @@ public class BoardGraphics extends View {
       }
     }
    
+  }
+  
+  
+  
+  /**
+   * Zwraca współrzędne ostatnio klikniętego pola planszy
+   * @return Współrzędne (punkt)
+   * @throws Exception Kliknięcie poza planszą
+   */
+  private Point getFieldCoords() throws Exception {
+    	
+	int x = (int) Math.round((touchX - PX_BOARD_MARGIN.x - 12) / (double)pxField) ;
+	int y = (int) Math.round((touchY - PX_BOARD_MARGIN.y) / (double)pxField);
+  
+	if (x < 0 || x >= colsAndRows || y < 0 || y >= colsAndRows) throw new Exception();
+	
+	return new Point(x, y);
+	
   }
   
   

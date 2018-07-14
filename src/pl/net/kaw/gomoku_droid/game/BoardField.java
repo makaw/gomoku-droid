@@ -94,6 +94,24 @@ public class BoardField implements Serializable, Move {
 	   
    }
    
+   /**
+    * Etykieta pola A(X)
+    * @param a Indeks pola A(X)
+    * @return Etykieta
+    */
+   public static String getLabA(int a) {
+	 return Character.toString((char)('A' + a));
+   }
    
-
+   /**
+    * Etykieta pola B(Y)
+    * @param b Indeks pola B(Y)
+    * @param colsAndRows Liczba wierszy/kolumn
+    * @return Etykieta
+    */
+   public static String getLabB(int b, int colsAndRows) {
+	 return String.valueOf(colsAndRows - b);    
+   }
+   
+   
 }
