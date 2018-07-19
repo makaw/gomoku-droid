@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>pl.net.kaw</groupId>
 	<artifactId>gomoku-droid</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>0.2-SNAPSHOT</version>
 	<packaging>apk</packaging>
 	<name>Gomoku 4 Android</name>
 	<organization>

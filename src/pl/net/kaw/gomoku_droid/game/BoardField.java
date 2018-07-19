@@ -25,6 +25,8 @@ public class BoardField implements Serializable, Move {
    private final int b;
    /** Stan pola planszy */
    private BoardFieldState state;
+   /** Czy zaznaczone */
+   private boolean checked = false;
    
    
    private final static long serialVersionUID = 1L;
@@ -79,6 +81,16 @@ public class BoardField implements Serializable, Move {
       this.state = state; 
        
    }
+   
+   
+   public boolean isChecked() {
+	 return checked;
+   }
+   
+   public void setChecked(boolean checked) {
+	 this.checked = checked;
+   }
+   
    
    
    @Override

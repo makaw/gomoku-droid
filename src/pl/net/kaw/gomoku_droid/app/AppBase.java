@@ -24,7 +24,7 @@ public class AppBase extends Application {
 
 	/** Ustawienia gry */
 	private Settings settings;
-	
+	/** Szyna zdarzeń */
 	private final AppEventBus eventBus = new AppEventBus();
 	
 	

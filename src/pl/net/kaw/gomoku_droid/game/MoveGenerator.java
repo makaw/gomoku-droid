@@ -62,15 +62,20 @@ public class MoveGenerator extends IA<BoardField> {
    public static BoardField getMove(Board board, BoardFieldState computerColor) {
 	   
 	 // na początku losowy ruch w pobliżu środka
-	 if (board.getFreeFieldsAmount() >= board.getFieldsAmount()-1) {
+	 if (board.getFreeFieldsAmount() == board.getFieldsAmount()) {
 	   int a = board.getColsAndRows() / 2;
-	   int rand1 = new Random().nextInt(a) - a/2;
-	   int rand2 = new Random().nextInt(a) - a/2;
+	   int rand1 = 0, rand2 = 0;
+	   do {
+	     rand1 = new Random().nextInt(a) - a/2;
+	     rand2 = new Random().nextInt(a) - a/2;
+	   } while (board.getFieldState(a + rand1, a + rand2) != BoardFieldState.EMPTY);
 	   return new BoardField(a + rand1, a + rand2, computerColor);
 	 }
    	   
-	 return new MoveGenerator(board, computerColor).getBestMove();
-	 	 	   	   
+	 BoardField move = new MoveGenerator(board, computerColor).getBestMove();
+	 move.setState(computerColor);
+	 return move;
+	 
    }      
 	
 	

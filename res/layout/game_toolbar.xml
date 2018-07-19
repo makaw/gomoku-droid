@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/white_stones"
                 android:paddingTop="3dp"
-                android:src="@drawable/white" />
+                android:src="@drawable/white_m" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
                 android:layout_marginStart="15dp"
                 android:contentDescription="@string/black_stones"
                 android:paddingTop="3dp"
-                android:src="@drawable/black" />
+                android:src="@drawable/black_m" />
 
             <TextView
                 android:layout_width="wrap_content"

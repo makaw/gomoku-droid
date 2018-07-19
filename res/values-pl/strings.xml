@@ -25,7 +25,7 @@
     
     <string name="white_stones">Białe kamienie</string>
     <string name="black_stones">Czarne kamienie</string>
-    <string name="computer">Komputer</string>
+    <string name="computer">Android</string>
     <string name="player">Gracz</string>
     <string name="timer">Czas gry</string>
     
@@ -38,6 +38,19 @@
     <string name="gtb_zoom_out">Pomniejsz widok planszy</string>
     
     <string name="not_implemented">Jeszcze nie zaimplementowane ....</string>
+    
+    <string name="confirm_restart_game">Czy na pewno przerwać bieżącą grę?</string>
+    <string name="winner">%1$s wygrywa (ruchów: %2$d) !!!</string>
+    <string name="draw_title">Remis</string>
+    <string name="draw">Niesamowite, to remis!</string>       
+    <string name="winner_title">%1$s wygrywa</string>
+    <string name="please_wait">Proszę czekać, myślę ....</string>  
+    <string name="cancel_btn">Anuluj</string>
+    <string name="game_interrupted">Gra została przerwana!</string>
+    <string name="game_started">Zaczynamy grę!</string>
+    
+    <string name="white">białe</string>
+    <string name="black">czarne</string>
     
 </resources>
     

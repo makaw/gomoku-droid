@@ -201,20 +201,6 @@ public class Board {
       
   }
   
-  
-
-  
-  /**
-   * Metoda zwracająca nazwę (np.A1) wskazanego pola planszy
-   * @param field Pole planszy
-   * @return Nazwa (np.A1) wskazanego pola
-   */
-  public String getFieldName(BoardField field) {
-      
-     return Character.toString((char)('A' + field.getA()))
-    		 + Integer.toString(settings.getColsAndRows() - field.getB());
-      
-  }  
 
   
   //-----------------------------------------------------------------------------------

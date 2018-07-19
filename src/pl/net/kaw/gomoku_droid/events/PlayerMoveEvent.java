@@ -5,30 +5,46 @@
  */
 package pl.net.kaw.gomoku_droid.events;
 
-import android.graphics.Point;
+import pl.net.kaw.gomoku_droid.game.BoardField;
 
 /**
- * Zdarzenie: kliknięcie - ruch gracza
+ * Zdarzenie: ruch gracza
  * @author Maciej Kawecki
  * 
  */
-public final class PlayerMoveEvent { 
+public class PlayerMoveEvent { 
     
-  /** Współrzędne */
-  private final Point coords;
+  /** Pole planszy */
+  private final BoardField field;
+  
+  /** Nazwa gracza */
+  private final String playerName;
   
   
-  public PlayerMoveEvent(Point coords) {
-	this.coords = coords;
+  public PlayerMoveEvent(BoardField field, String playerName) {
+	this.field = field;
+	this.playerName = playerName;
   }
 	
   
-  public int getX() {
-	return coords.x;
-  }
-  
-  public int getY() {
-	return coords.y;
+  public BoardField getField() {
+	return field;
   }  
+  
+  
+  public String getPlayerName() {
+	return playerName;
+  }  
+  
+  
+  @Override
+  public String toString() {
+	try {
+	  return playerName + " " + field.getState() + " / " + field.getA() + "/" + field.getB();  
+	}
+	catch (NullPointerException e) {
+	  return "null";	
+	}  
+  }
     
 }

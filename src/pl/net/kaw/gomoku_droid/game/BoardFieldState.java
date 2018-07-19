@@ -5,6 +5,9 @@
  */
 package pl.net.kaw.gomoku_droid.game;
 
+import android.content.Context;
+import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.app.AppBase;
 
 /**
  *
@@ -63,10 +66,12 @@ public enum BoardFieldState {
     */
    public String getName() {
 	   
+	   Context context = AppBase.getInstance().getBaseContext();
+	   
 	   switch (this) {
 	     default: return "-";
-	     case WHITE: return "białe";//Lang.get("White");
-	     case BLACK: return "czarne";//Lang.get("Black");
+	     case WHITE: return context.getString(R.string.white);
+	     case BLACK: return context.getString(R.string.black);
 	   }
 	   
    }

@@ -47,11 +47,17 @@ public interface IConfig {
 	/** Min współczynnik powiększenia planszy */
 	float MIN_ZOOM_FACTOR = 0.5f;	
 	/** Max współczynnik powiększenia planszy */
-	float MAX_ZOOM_FACTOR = 2.0f;	
+	float MAX_ZOOM_FACTOR = 1.6f;	
 	/** Krok powiększenia planszy */
 	float ZOOM_FACTOR_STEP = 0.1f;
 	
+	/** Wielkość kamienia dla najniższego powiększenia planszy */
+	int MIN_PIECE_SIZE_PX = 26;
+	
+	/** Próg rozpoznania kliku */
+	int CLICK_ACTION_THRESHOLD = 200;
+	
 	/** Wersja aplikacji */
-	String VERSION = "0.0.7 (build %s)";
+	String VERSION = "0.2 (build %s)";
 	
 }

@@ -36,10 +36,11 @@ public class ModDialog extends Dialog {
    * @param message Wiadomość
    * @param icon ID ikony nagłówka
    * @param callable Metoda wykonywana w listenerze przycisku "Tak"
+   * @param callableNo Metoda wykonywana dodatkowo w listenerze przycisku "Nie"
    * @param <T> Typ zwracany przez metodę callable
    */
   private <T> ModDialog(final AppActivity context, String title, String message,
-		  int icon, final Callable<T> callable) {
+		  int icon, final Callable<T> callable, final Callable<T> callableNo) {
 	  
     super(context);
 
@@ -47,6 +48,7 @@ public class ModDialog extends Dialog {
     if (title == null) requestWindowFeature(Window.FEATURE_NO_TITLE);
     
     setContentView(R.layout.info_dialog);
+	setCanceledOnTouchOutside(false);
 	
     if (title != null) setTitle(title);
     if (icon !=-1) setFeatureDrawableResource(Window.FEATURE_LEFT_ICON, icon);
@@ -88,6 +90,14 @@ public class ModDialog extends Dialog {
 		@Override
 		public void onClick(View v) {
 		  v.startAnimation(AppActivity.BUTTON_CLICK);
+		  if (callableNo != null) {
+			try {
+			  callableNo.call();
+			}
+			catch (Exception e) {
+			  if (IConfig.DEBUG) Log.e(context.getTag(), "Callable[no] e: " + e.getMessage());  
+			}
+		  }
 		  ModDialog.this.dismiss();
 		}
 		
@@ -95,6 +105,11 @@ public class ModDialog extends Dialog {
 	
   }
   
+  
+  private <T> ModDialog(final AppActivity context, String title, String message,
+		  int icon, final Callable<T> callable) {
+	this(context, title, message, icon, callable, null);
+  }
   
   
   /**
@@ -104,12 +119,25 @@ public class ModDialog extends Dialog {
    * @param callable Metoda wykonywana w listenerze przycisku "Tak"
    * @param <T> Typ zwracany przez metodę callable
    */
-  public static <T> void showConfirmDialog(AppActivity context, String message, Callable<T> callable) {
+  public static <T> void showConfirmDialog(AppActivity context, String message, Callable<T> callable) {	  
+	showConfirmDialog(context, message, callable, null);	  
+  }
+  
+  
+  /**
+   * Pokazuje okienko z potwierdzeniem
+   * @param context Bieżący kontekst
+   * @param message Treść wiadomości
+   * @param callable Metoda wykonywana w listenerze przycisku "Tak"
+   * @param callable Dodatkowa metoda wykonywana w listenerze przycisku "Nie"
+   * @param <T> Typ zwracany przez metodę callable
+   */
+  public static <T> void showConfirmDialog(AppActivity context, String message, Callable<T> callable, Callable<T> callableNo) {
 	  
 	 new ModDialog(context, context.getString(R.string.confirm), message,
-			 R.drawable.ic_dialog_question, callable).show(); 
+			 R.drawable.ic_dialog_question, callable, callableNo).show(); 
 	  
-  }
+  }  
   
   
   /**

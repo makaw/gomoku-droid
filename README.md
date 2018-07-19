@@ -1,10 +1,10 @@
 # Gomoku 4 Android
 Android version of my [Gomoku desktop project](https://github.com/makaw/gomoku). 
-Work in progress, not playable yet.
+It's already quite playable! But still needs some work.
 
 ----------
 
-![Gomoku 4 Android](http://kaw.net.pl/gomoku_img/android1.jpg)
+![Gomoku 4 Android](http://kaw.net.pl/gomoku_img/android1a.jpg)
 
 ----------
 

@@ -28,7 +28,7 @@
     
     <string name="white_stones">White stones</string>
     <string name="black_stones">Black stones</string>
-    <string name="computer">Computer</string>
+    <string name="computer">Android</string>
     <string name="player">Player</string>
     <string name="timer">Game time</string>
     
@@ -40,8 +40,21 @@
     <string name="gtb_zoom_in">Board zoom in</string>
     <string name="gtb_zoom_out">Board zoom out</string>
     
-    <string name="not_implemented">Not implemented yet ....</string>
+    <string name="not_implemented">Not implemented yet ....</string>   
     
+    <string name="confirm_restart_game">Are you sure you want to end the current game?</string>
+    <string name="winner">%1$s won (moves: %2$d) ....</string>
+    <string name="draw_title">Draw</string>
+    <string name="draw">Wow, it is a draw!</string>
+    <string name="winner_title">%1$s won</string>
+    <string name="please_wait">Please wait, I\'m thinking ....</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="game_interrupted">Game has been cancelled!</string>
+    <string name="game_started">Let\'s start the game!</string>
+    
+    <string name="white">white</string>
+    <string name="black">black</string>
+   
 </resources>
     
     

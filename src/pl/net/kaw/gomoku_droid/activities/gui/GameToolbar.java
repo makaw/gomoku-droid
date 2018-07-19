@@ -111,10 +111,12 @@ public class GameToolbar {
 	  @Override
 	  public void onClick(View v) {
 		v.startAnimation(AppActivity.BUTTON_CLICK);
-		activity.message(activity.getString(R.string.not_implemented));
+		activity.restartGame();
 	  }
 	});
    
+    tryToEnableZoomButtons(activity.getBoardGraphics().getMidZoomFactor());
+    
   }
   
   
@@ -140,7 +142,8 @@ public class GameToolbar {
    */
   private boolean isZoomEnabled(boolean out, float factor) {	  
 	float f = factor + (out ? -1.0f : 1.0f) * IConfig.ZOOM_FACTOR_STEP;
-	return f >= IConfig.MIN_ZOOM_FACTOR && f <= IConfig.MAX_ZOOM_FACTOR;  	  
+	float mx = activity.getBoardGraphics().getMidZoomFactor();
+	return f >= IConfig.MIN_ZOOM_FACTOR * mx && f <= IConfig.MAX_ZOOM_FACTOR * mx;  	  
   }
   
   
