@@ -93,18 +93,6 @@ public class BoardField implements Serializable, Move {
    
    
    
-   @Override
-   public boolean equals(Object object) {
-	   
-	 try {
-	   BoardField field = (BoardField) object;
-	   return field.a == a && field.b == b && field.state == state;
-	 }
-	 catch (ClassCastException e) {
-	   return false;
-	 }
-	   
-   }
    
    /**
     * Etykieta pola A(X)
@@ -124,6 +112,32 @@ public class BoardField implements Serializable, Move {
    public static String getLabB(int b, int colsAndRows) {
 	 return String.valueOf(colsAndRows - b);    
    }
+
+   @Override
+   public int hashCode() {
+	 final int prime = 31;
+	 int result = 1;
+	 result = prime * result + a;
+	 result = prime * result + b;
+	 return result;
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+	 if (this == obj)
+		return true;
+	 if (obj == null)
+		return false;
+	 if (getClass() != obj.getClass())
+		return false;
+	 BoardField other = (BoardField) obj;
+	 if (a != other.a)
+		return false;
+	 if (b != other.b)
+		return false;
+	 return true;
+   }
+        
    
    
 }

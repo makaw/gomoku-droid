@@ -369,7 +369,7 @@ public class BoardGraphics extends View {
   @Subscribe
   public void noticePlayerMove(final PlayerMoveEvent event) {	
 	 if (pieces.contains(event.getField()) || !gameRunning) return; 
-	 Log.d(TAG, event.toString());
+	 if (IConfig.DEBUG) Log.d(TAG, event.toString());
 	 pieces.add(event.getField());	 
 	 invalidate();
   }
@@ -379,13 +379,13 @@ public class BoardGraphics extends View {
   public void noticeGameOver(final GameOverEvent event) {
 	 
 	 if (!gameRunning) return; 
-	  
+	 gameRunning = false;
+	   
 	 if (event.getWinRow() != null) {
 	   for (BoardField bf: event.getWinRow()) {
 		 bf.setChecked(true);
 		 pieces.add(bf);   	
 	   }
-	   gameRunning = false;
 	   invalidate();
 	 }	 
 	    
