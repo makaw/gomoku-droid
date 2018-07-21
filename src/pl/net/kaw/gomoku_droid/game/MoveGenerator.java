@@ -82,6 +82,7 @@ public class MoveGenerator extends IA<BoardField> {
 	 if (IConfig.DEBUG) watch.start();
 	 
 	 BoardField move = new MoveGenerator(board, computerColor).getBestMove();
+	 if (move == null) return null;
 	 move.setState(computerColor);
 	 
 	 if (IConfig.DEBUG)  {
