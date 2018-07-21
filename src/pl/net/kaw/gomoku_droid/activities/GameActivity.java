@@ -21,6 +21,7 @@ import pl.net.kaw.gomoku_droid.activities.gui.ModDialog;
 import pl.net.kaw.gomoku_droid.app.AppEventBus;
 import pl.net.kaw.gomoku_droid.events.BoardClickEvent;
 import pl.net.kaw.gomoku_droid.events.GameOverEvent;
+import pl.net.kaw.gomoku_droid.events.PlaySoundEvent;
 import pl.net.kaw.gomoku_droid.events.ProgressEvent;
 import pl.net.kaw.gomoku_droid.events.ZoomChangedEvent;
 import pl.net.kaw.gomoku_droid.game.Game;
@@ -63,6 +64,7 @@ public class GameActivity extends AppActivity {
       game = new Game(new Handler());
       game.start();
       message(getString(R.string.game_started));
+      playSound(PlaySoundEvent.SoundType.INFO);
       
       buildProgressDialog();
       
@@ -107,6 +109,7 @@ public class GameActivity extends AppActivity {
 	  
 	  AppEventBus.register(this);
 	  message(getString(R.string.game_started));
+	  playSound(PlaySoundEvent.SoundType.INFO);
 	  boardGraphics.init();
 	  game = new Game(new Handler());
 	  game.start();
@@ -130,6 +133,10 @@ public class GameActivity extends AppActivity {
     	
     }
     
+    @Subscribe
+    public void noticePlaySound(final PlaySoundEvent event) {      
+      playSound(event.getType());
+    }
     
     
     @Subscribe

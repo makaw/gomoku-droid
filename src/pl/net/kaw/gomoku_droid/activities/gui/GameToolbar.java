@@ -54,6 +54,10 @@ public class GameToolbar {
    */
   public void init() {
 	  
+	boolean cb = AppBase.getInstance().getSettings().isComputerStarts() && IConfig.BLACK_STARTS;  
+	((TextView) activity.findViewById(R.id.white_stones_player_txt)).setText(activity.getString(cb ? R.string.player : R.string.computer));
+	((TextView) activity.findViewById(R.id.black_stones_player_txt)).setText(activity.getString(cb ? R.string.computer : R.string.player));  
+	
 	Button backBtn = (Button) activity.findViewById(R.id.gtb_back_btn);
     backBtn.setOnClickListener(new View.OnClickListener() {		
 	  @Override

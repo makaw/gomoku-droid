@@ -21,7 +21,7 @@ public interface IConfig {
 	/** Największa możliwa liczba wierszy (nieparzyste) */
 	int MAX_COLS_AND_ROWS = 15;   
 	/** Domyślna liczba wierszy i kolumn planszy */
-	int DEFAULT_COLS_AND_ROWS = 15;
+	int DEFAULT_COLS_AND_ROWS = 9;
 	   
 	/** Najmniejsza możliwa liczba kamieni w rzędzie wymagana do wygranej */
 	int MIN_PIECES_IN_ROW = 3;
@@ -30,8 +30,11 @@ public interface IConfig {
 	/** Domyślna liczba kamieni w rzędzie */
 	int DEFAULT_PIECES_IN_ROW = 5;	
 	   
-	/** Czy komputer zaczyna grę (czarne) */
+	/** Czy komputer zaczyna grę */
 	boolean DEFAULT_COMPUTER_STARTS = true;  
+	
+	/** Czy czarne zaczynają */
+	boolean BLACK_STARTS = true;
 
 	/** Domyślnie - czy włączony jest dźwięk */
 	boolean DEFAULT_ENABLE_SOUND = true;     	
@@ -58,6 +61,7 @@ public interface IConfig {
 	int CLICK_ACTION_THRESHOLD = 200;
 	
 	/** Wersja aplikacji */
-	String VERSION = "0.2 (build %s)";
+	String VERSION = "0.2.1 (build %s)";
+	
 	
 }

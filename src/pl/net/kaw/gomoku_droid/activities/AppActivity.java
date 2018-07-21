@@ -16,6 +16,9 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+import pl.net.kaw.gomoku_droid.R;
+import pl.net.kaw.gomoku_droid.app.AppBase;
+import pl.net.kaw.gomoku_droid.events.PlaySoundEvent;
 
 /**
  *
@@ -54,10 +57,20 @@ public abstract class AppActivity extends Activity {
 	/**
 	 * Odegranie dźwięku jeżeli aktywność jest widoczna
 	 */
-	public void playSound(int resId) {
+	protected void playSound(PlaySoundEvent.SoundType type) {
 
 		if (!inFront)
 			return;
+		
+		if (!AppBase.getInstance().getSettings().isSoundEnabled()) return;
+	      
+		int resId;
+	    switch (type) {
+	      default: return;
+	      case INFO: resId = R.raw.info; break;
+	      case MOVE: resId = R.raw.move; break;
+	      case SUCCESS: resId = R.raw.success; break;
+	    }
 
 		MediaPlayer mp = MediaPlayer.create(this, resId);
 

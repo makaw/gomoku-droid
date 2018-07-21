@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.util.Log;
+import pl.net.kaw.gomoku_droid.app.IConfig;
 import pl.net.kaw.gomoku_droid.app.Settings;
 
 
@@ -28,12 +30,13 @@ public class BoardScoring {
   /** Aktualny stan planszy - linie poziome, pionowe i ukośne (repr. znakowa) */
   private final String[] boardLines = new String[] {"", "", "", ""};
   /** Wszystkie rozważane ciągi kamieni */
-  private final String[] allRowsB, allRowsW; 	
+  private final ScoringMatch[] allRowsB, allRowsW; 	
   /** Wygrywające ciągi kamieni */
   private final String successB, successW;
-  
   /** Aktualne ustawienia gry */
   private final Settings settings;
+  
+  private static final String TAG = BoardScoring.class.getSimpleName();
   
   
   /**
@@ -51,7 +54,7 @@ public class BoardScoring {
 	     if (b>=a) boardLines[SKETCH_R] += "0"; else boardLines[SKETCH_R] += "x";	       
 	   }      	      
 	   boardLines[HORIZ] += "|"; 
-	   boardLines[SKETCH_L] += "|";  boardLines[SKETCH_R] += "|";	     
+	   boardLines[SKETCH_L] += "|";  boardLines[SKETCH_R] += "|";	 
 	} 
 
     boardLines[SKETCH_L] += boardLines[SKETCH_R].substring(settings.getColsAndRows()+1);
@@ -62,26 +65,11 @@ public class BoardScoring {
     successW = BoardFieldState.WHITE.getWinningRow(settings.getPiecesInRow());    
 	allRowsB = getAllRows(BoardFieldState.BLACK);		
     allRowsW = getAllRows(BoardFieldState.WHITE);    
+    
+    if (IConfig.DEBUG) Log.i(TAG, "Matches: " + allRowsB.length);
     	
   }
-  
-  
-  
-  /**
-   * Czy wygrywa
-   * @param pColor Kolor kamieni
-   * @return True jeżeli wygrana
-   */
-  public boolean hasWon(BoardFieldState pColor) {	  
-
-	String success = pColor == BoardFieldState.BLACK ? successB : successW;  
-	  
-	return boardLines[HORIZ].contains(success)
-			|| boardLines[VERT].contains(success)
-			|| boardLines[SKETCH_L].contains(success)
-			|| boardLines[SKETCH_R].contains(success);
-	  
-  }  
+    
   
 	
   /**
@@ -123,21 +111,21 @@ public class BoardScoring {
    * @param pColor Kolor kamieni
    * @return Tablica ciągów znaków
    */
-  private String[] getAllRows(BoardFieldState pColor) {
+  private ScoringMatch[] getAllRows(BoardFieldState pColor) {
 	  
 	 String t = pColor.toString();
 	 String[] row = getAllRows(new String[] { t,  "0"}, settings.getPiecesInRow());
 	 
-	 List<String> tmp = new ArrayList<>();
+	 List<ScoringMatch> tmp = new ArrayList<>();
 	 
 	 for (String s: row) {
 		 
 	   int i = StringUtils.countMatches(s, t);
-	   if (i>1 && i<settings.getPiecesInRow()) tmp.add(s);
+	   if (i>1 && i<settings.getPiecesInRow()) tmp.add(new ScoringMatch(s, pColor.toString()));
 		 
 	 }
 	 
-	 String tmps[] = new String[tmp.size()];
+	 ScoringMatch tmps[] = new ScoringMatch[tmp.size()];
 	 return tmp.toArray(tmps);
 	  
   }
@@ -165,6 +153,8 @@ public class BoardScoring {
           
   }  
   
+  
+  
     
   /**   
    * Punktacja sytuacji na planszy
@@ -172,33 +162,21 @@ public class BoardScoring {
    * @return Aktualna punktacja planszy dla danego gracza
    */
   protected int getScore(BoardFieldState pColor) {
-	  
-	if (hasWon(pColor)) return MoveGenerator.MAX_SCORE;    
-	  
+	  	
 	int score = 0;
-	String pStr = pColor.toString();
-	String opStr = pColor.getOpposite().toString();
-	String matches[] = pColor == BoardFieldState.BLACK ? allRowsB : allRowsW;		
-
+	String opReg = "[0x"+pColor.getOpposite().toString()+"]{" + settings.getColsAndRows() + "}";
+	ScoringMatch matches[] = pColor == BoardFieldState.BLACK ? allRowsB : allRowsW;
+	String success = pColor == BoardFieldState.BLACK ? successB : successW;  
+	
 	for (String line : boardLines) {
 		
-	  line = line.replaceAll("[0x"+opStr+"]{" + settings.getColsAndRows() + "}", "");
+	  if (line.contains(success)) return MoveGenerator.MAX_SCORE;
+	  line = line.replaceAll(opReg, "");	
 	  
-	  for (String match : matches)  {
-
-		  int cnt = StringUtils.countMatches(match, pStr);
-
-		  // bonusy ...
-		  boolean near1 = cnt+2 == settings.getPiecesInRow();
-		  boolean near2 = near1 && match.startsWith("0") && match.endsWith("0");
-		  boolean near3 = !near1 && cnt+1 == settings.getPiecesInRow();
-		  
-		  double mcnt =  StringUtils.countMatches(line, match);
-		  if (near1) { mcnt *= 2; } 
-		  if (near2) { mcnt *= 4; } 
-		  if (near3) { mcnt *= 16; }  
-		  
-		  score += cnt * mcnt; 
+	  for (ScoringMatch match : matches)  {
+  
+		  int baseScore = StringUtils.countMatches(line, match.getMatch());
+		  score += baseScore * match.getScoreBonus();
 		   
 	  }
 	  
@@ -207,6 +185,59 @@ public class BoardScoring {
 	return score;
     
   }
+  
+  
+  /**
+   * Pomocnicza klasa - możliwe niepuste kombinacje (bez wygrywających) z oceną   
+   *
+   */
+  private class ScoringMatch {
+	  
+	/** Kombinacja */
+	private final String match;
+	/** Bonusy */
+	private final boolean near1, near2, near3;
+	/** Dodatkowy wynik */
+	private int score;
+	
+	/**
+	 * Konstruktor
+	 * @param match Kombinacja
+	 * @param pStr Kolor
+	 */
+	ScoringMatch(String match, String pStr) {	  
+	  this.match = match;
+	  int cnt = StringUtils.countMatches(match, pStr);
+	  near1 = cnt+2 == settings.getPiecesInRow();
+	  near2 = near1 && match.startsWith("0") && match.endsWith("0");
+	  near3 = !near1 && cnt+1 == settings.getPiecesInRow();
+	  score = cnt;
+	  if (near1) { score *= 2; } 
+	  if (near2) { score *= 4; } 
+	  if (near3) { score *= 16; }  
+	}
+	
+	
+	/**
+	 * Zwraca dodatkowe punkty dla kombinacji
+	 * @return jw
+	 */
+	public int getScoreBonus() {
+		
+	  return score;
+	  
+	}
+	  
+	
+	public String getMatch() {
+	  return match;
+	}
+	
+	  
+  }
+  
+  
+  
     
 	
 }

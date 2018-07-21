@@ -8,6 +8,7 @@ package pl.net.kaw.gomoku_droid.game;
 import android.content.Context;
 import pl.net.kaw.gomoku_droid.R;
 import pl.net.kaw.gomoku_droid.app.AppBase;
+import pl.net.kaw.gomoku_droid.app.IConfig;
 
 /**
  *
@@ -96,6 +97,18 @@ public enum BoardFieldState {
 	  for (int i=0; i<cnt; i++) row += this.toString();
 	  return row;
 	   
+   }
+   
+   /**
+    * Kolor rozpoczynający
+    * @return jw
+    */
+   public static BoardFieldState getFirst() {
+	 return IConfig.BLACK_STARTS ? BoardFieldState.BLACK : BoardFieldState.WHITE;   	   
+   }
+   
+   public static BoardFieldState getSecond() {
+	 return !IConfig.BLACK_STARTS ? BoardFieldState.BLACK : BoardFieldState.WHITE;   	   
    }
    
    

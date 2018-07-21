@@ -8,8 +8,12 @@ package pl.net.kaw.gomoku_droid.game;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.lang3.time.StopWatch;
+
+import android.util.Log;
 import fr.pixelprose.minimax4j.Difficulty;
 import fr.pixelprose.minimax4j.IA;
+import pl.net.kaw.gomoku_droid.app.IConfig;
 
 /**
 *
@@ -37,6 +41,8 @@ public class MoveGenerator extends IA<BoardField> {
 	   
    /** True jeżeli koniec gry (wygrana lub remis) */
    private boolean gameOver = false;
+   
+   private final static String TAG = MoveGenerator.class.getSimpleName();
    
    
    /**
@@ -72,8 +78,17 @@ public class MoveGenerator extends IA<BoardField> {
 	   return new BoardField(a + rand1, a + rand2, computerColor);
 	 }
    	   
+	 StopWatch watch = new StopWatch();
+	 if (IConfig.DEBUG) watch.start();
+	 
 	 BoardField move = new MoveGenerator(board, computerColor).getBestMove();
 	 move.setState(computerColor);
+	 
+	 if (IConfig.DEBUG)  {
+	    watch.stop();
+		Log.d(TAG, "Move generated @ " + String.format("%.3f", watch.getNanoTime()/1000000000.0));
+	 }
+	 
 	 return move;
 	 
    }      

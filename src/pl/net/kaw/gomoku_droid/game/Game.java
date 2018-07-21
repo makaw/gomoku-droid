@@ -15,6 +15,7 @@ import pl.net.kaw.gomoku_droid.app.IConfig;
 import pl.net.kaw.gomoku_droid.app.Settings;
 import pl.net.kaw.gomoku_droid.events.BoardClickEvent;
 import pl.net.kaw.gomoku_droid.events.GameOverEvent;
+import pl.net.kaw.gomoku_droid.events.PlaySoundEvent;
 import pl.net.kaw.gomoku_droid.events.PlayerMoveEvent;
 import pl.net.kaw.gomoku_droid.events.ProgressEvent;
 
@@ -78,14 +79,14 @@ public class Game extends Thread {
 	 lastClick = null;
 	 moveNo = 1;
 	 Player[] players = new Player[2]; 
-		     
+		     	 	 
 	 if (settings.isComputerStarts()) {
-	   players[0] = new PlayerComputer(BoardFieldState.BLACK, "Android");
-	   players[1] = new PlayerHuman(BoardFieldState.WHITE, "Player");
+	   players[0] = new PlayerComputer(BoardFieldState.getFirst(), "Android");
+	   players[1] = new PlayerHuman(BoardFieldState.getSecond(), "Player");
 	 }
 	 else {        	  
-	   players[0] = new PlayerHuman(BoardFieldState.BLACK, "Player");
-	   players[1] = new PlayerComputer(BoardFieldState.WHITE, "Android");
+	   players[0] = new PlayerHuman(BoardFieldState.getFirst(), "Player");
+	   players[1] = new PlayerComputer(BoardFieldState.getSecond(), "Android");
 	 }
 		         
 	 running = true;  
@@ -146,10 +147,9 @@ public class Game extends Thread {
            @Override
            public void run() {
         	   AppEventBus.post(moveEvent); 
+        	   AppEventBus.post(new PlaySoundEvent(PlaySoundEvent.SoundType.MOVE));
            }
-         });
-  	 	
-         // sounds.play(Sounds.SND_INFO); 
+         });  	 	
           
          List<BoardField> winRow = board.getWinningRow(lastMove);
         
@@ -160,6 +160,7 @@ public class Game extends Thread {
               @Override
               public void run() {
             	AppEventBus.post(gameOverEvent); 
+            	AppEventBus.post(new PlaySoundEvent(PlaySoundEvent.SoundType.SUCCESS));
               }
             });          
          	 	

@@ -106,11 +106,11 @@
                 android:src="@drawable/white_m" />
 
             <TextView
+                android:id="@+id/white_stones_player_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
-                android:text="@string/computer"
                 android:textColor="@color/fg_toolbar"
                 android:textSize="12sp" />
 
@@ -124,11 +124,11 @@
                 android:src="@drawable/black_m" />
 
             <TextView
+                android:id="@+id/black_stones_player_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
-                android:text="@string/player"
                 android:textColor="@color/fg_toolbar"
                 android:textSize="12sp" />
 
