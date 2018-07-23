@@ -137,6 +137,11 @@ public class BoardField implements Serializable, Move {
 		return false;
 	 return true;
    }
+   
+   @Override
+   public String toString() {
+	 return a + "/" + b + " " + state.toString() + "/" + (checked ? "c" : "-");
+   }
         
    
    

@@ -95,6 +95,8 @@ public class BoardGraphics extends View {
   
   /** Czy aktywna rozgrywka */
   private boolean gameRunning = false;
+  /** Wygrywający rząd */
+  private final Set<BoardField> winRow = new HashSet<>();
   
   
   public BoardGraphics(Context context, AttributeSet attrs, int defStyle) {
@@ -193,6 +195,7 @@ public class BoardGraphics extends View {
   
   public void init() {
     AppEventBus.register(this);	
+    winRow.clear();
     gameRunning = true;
   }
   
@@ -342,6 +345,7 @@ public class BoardGraphics extends View {
     // kamienie
     for (BoardField field: pieces) {
       if (field.getState() == BoardFieldState.EMPTY) continue;
+      if (winRow.contains(field)) field.setChecked(true);
       Bitmap bmp = getFieldBitmap(field);
       if (bmp == null) continue;
       Point coords = getCanvasCoords(field.getA(), field.getB());
@@ -357,6 +361,7 @@ public class BoardGraphics extends View {
   public void clear() {
 	pieces.clear();
 	gameRunning = false;
+	winRow.clear();
 	try {
 	  AppEventBus.unregister(this);	
 	}
@@ -382,10 +387,7 @@ public class BoardGraphics extends View {
 	 gameRunning = false;
 	   
 	 if (event.getWinRow() != null) {
-	   for (BoardField bf: event.getWinRow()) {
-		 bf.setChecked(true);
-		 pieces.add(bf);   	
-	   }
+	   winRow.addAll(event.getWinRow());
 	   invalidate();
 	 }	 
 	    
