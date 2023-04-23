@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Gomoku</string>
+	<string name="credits">Gomoku v. %s\nhttp://github.com/makaw/gomoku-droid</string>
+	
+    <string name="menu_newgame">NEW GAME</string>
+    <string name="menu_about">ABOUT GOMOKU</string>
+    <string name="menu_settings">SETTINGS</string>
+    <string name="menu_exit">EXIT</string>    
+    <string name="menu_back">ᐊ BACK</string>
+    <string name="menu_save">✔ SAVE</string>
+    
+    <string name="confirm">Please confirm</string>
+    <string name="confirm_quit">Are you sure you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok"> OK </string>
+    
+    <string name="st_board_size">Board size:</string>
+    <string name="st_win_condition">Win condition:</string>
+    <string name="st_language">Language:</string>
+    <string name="st_computer_starts">Computer starts the game</string>
+    <string name="st_sounds_enabled">Game sounds enabled</string>
+    <string name="x_fields">%1$d × %1$d fields</string>
+    <string name="row_x_stones">row of %1$d stones</string>
+    <string name="settings_changed">Settings have been changed.</string>
+    
+    <string name="white_stones">White stones</string>
+    <string name="black_stones">Black stones</string>
+    <string name="computer">Android</string>
+    <string name="player">Player</string>
+    <string name="timer">Game time</string>
+    
+    <string name="confirm_end_game">Are you sure you want to quit the current game?</string>    
+    <string name="gtb_back">Quit game</string>
+    <string name="gtb_restart">Start new game</string>
+    <string name="gtb_help">About Gomoku</string>
+    <string name="gtb_sound">Sound on/off</string>
+    <string name="gtb_zoom_in">Board zoom in</string>
+    <string name="gtb_zoom_out">Board zoom out</string>
+    
+    <string name="not_implemented">Not implemented yet ....</string>   
+    
+    <string name="confirm_restart_game">Are you sure you want to end the current game?</string>
+    <string name="winner">%1$s won (moves: %2$d) ....</string>
+    <string name="draw_title">Draw</string>
+    <string name="draw">Wow, it is a draw!</string>
+    <string name="winner_title">%1$s won</string>
+    <string name="please_wait">Please wait ....</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="game_interrupted">Game has been cancelled!</string>
+    <string name="game_started">Let\'s start the game!</string>
+    
+    <string name="white">white</string>
+    <string name="black">black</string>
+   
+</resources>
+    
+    

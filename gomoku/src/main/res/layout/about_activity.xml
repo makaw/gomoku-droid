@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/main_nob" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:weightSum="10" >
+
+        <View 
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/txt_about"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:text="@string/credits"
+            android:textColor="#555"
+            android:textColorLink="#555"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="15dp" />
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5.8"
+            android:fillViewport="true" >
+
+            <TextView
+                android:id="@+id/txt_about_rules"
+                style="@style/AppTheme"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="2dp"
+                android:linksClickable="false"
+                android:textColor="#222"
+                android:textSize="14sp" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/back_item"
+            style="@style/MenuFont"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1.4"
+            android:text="@string/menu_back"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</RelativeLayout>

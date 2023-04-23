@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="85dp"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|top"
+        android:background="@drawable/bg_toolbar"
+        android:orientation="vertical"
+        android:padding="2dp"
+        android:textColor="@color/fg_toolbar" >
+
+        <LinearLayout
+            style="android:attr/buttonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp" >
+
+            <Button
+                android:id="@+id/gtb_zoom_out_btn"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/btn_zoom_out"
+                android:contentDescription="@string/gtb_zoom_out" />
+
+            <Button
+                android:id="@+id/gtb_zoom_in_btn"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/btn_zoom_in"
+                android:contentDescription="@string/gtb_zoom_in" />
+
+            <Button
+                android:id="@+id/gtb_help_btn"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/btn_help"
+                android:contentDescription="@string/gtb_help" />
+
+            <Button
+                android:id="@+id/gtb_sound_btn"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/btn_sound"
+                android:contentDescription="@string/gtb_sound" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/gtb_restart_btn"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/btn_restart"
+                android:contentDescription="@string/gtb_restart" />
+
+            <Button
+                android:id="@+id/gtb_back_btn"
+                style="android:attr/buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/btn_back"
+                android:contentDescription="@string/gtb_back" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="23dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/white_stones"
+                android:paddingTop="3dp"
+                app:srcCompat="@drawable/white_m" />
+
+            <TextView
+                android:id="@+id/white_stones_player_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/fg_toolbar"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:contentDescription="@string/black_stones"
+                android:paddingTop="3dp"
+                app:srcCompat="@drawable/black_m" />
+
+            <TextView
+                android:id="@+id/black_stones_player_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/fg_toolbar"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/timer"
+                android:paddingTop="3dp"
+                app:srcCompat="@drawable/timer" />
+
+            <TextView
+                android:id="@+id/gtb_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/fg_toolbar"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/bg_toolbar_border"
+        android:orientation="vertical" />
+
+</LinearLayout>

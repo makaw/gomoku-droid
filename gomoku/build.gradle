@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "pl.net.kaw.gomoku_droid"
+        minSdkVersion 21
+        targetSdkVersion 33
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    namespace 'pl.net.kaw.gomoku_droid'
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
+
+    signingConfigs {
+        buildTypes {
+            debug {
+                buildConfigField("String", "BUILD_TIME", "\"" + System.currentTimeMillis().toString() + "\"")
+            }
+            release {
+                buildConfigField("String", "BUILD_TIME", "\"" + System.currentTimeMillis().toString() + "\"")
+            }
+        }
+    }
+}
+
+dependencies {
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.appcompat:appcompat:1.6.1'
+    api 'androidx.appcompat:appcompat-resources:1.6.1'
+    api "com.google.guava:guava:31.1-android"
+    api group: 'fr.avianey', name: 'minimax4j', version: '1.0.0'
+    api group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+}
