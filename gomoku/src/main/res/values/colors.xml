@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="btn_white_bg_start">#cfcfcf</color>
+    <color name="btn_white_bg_end">#eaeaea</color>
+    <color name="btn_white_border">#b0b0b0</color>
+    <color name="bg_toolbar">#555</color>
+    <color name="bg_toolbar_border">#720001</color>
+    <color name="fg_toolbar">#333</color>
+    <color name="bg_progress">#eee</color>
+    <color name="bg_modal">#555</color>
+    <color name="std_text">#333</color>
+    <color name="spinner_dditem_text">#333</color>
+    <color name="spinner_item_text">#777</color>
+    <color name="spinner_dditem_bg">#aaeaeaea</color>
+	
+</resources>

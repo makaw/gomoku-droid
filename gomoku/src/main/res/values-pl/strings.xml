@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">Gomoku</string>
+	<string name="credits">Gomoku w. %s\nhttp://github.com/makaw/gomoku-droid</string>    
+
+    <string name="menu_newgame">NOWA GRA</string>
+    <string name="menu_about">INFORMACJE</string>
+    <string name="menu_settings">USTAWIENIA</string>
+    <string name="menu_exit">KONIEC</string>    
+    <string name="menu_back">ᐊ POWRÔT</string>
+    <string name="menu_save">✔ ZAPISZ</string>
+    
+    <string name="confirm">Potwierdzenie</string>
+    <string name="confirm_quit">Czy na pewno zakończyć działanie aplikacji?</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="ok"> OK </string>
+    
+    <string name="st_board_size">Wymiary planszy:</string>
+    <string name="st_win_condition">Warunek wygranej:</string>
+    <string name="st_language">Język:</string>
+    <string name="st_computer_starts">Komputer rozpoczyna grę</string>
+    <string name="st_sounds_enabled">Dźwięki w czasie gry włączone</string>    
+    <string name="x_fields">%1$d × %1$d pól</string>
+    <string name="row_x_stones">rząd %1$d kamieni</string>
+    <string name="settings_changed">Ustawienia zostały zmienione.</string>
+    
+    <string name="white_stones">Białe kamienie</string>
+    <string name="black_stones">Czarne kamienie</string>
+    <string name="computer">Android</string>
+    <string name="player">Gracz</string>
+    <string name="timer">Czas gry</string>
+    
+    <string name="confirm_end_game">Czy na pewno zakończyć bieżącą grę?</string>    
+    <string name="gtb_back">Zakończ grę</string>
+    <string name="gtb_restart">Rozpocznij nową grę</string>
+    <string name="gtb_help">Informacje</string>
+    <string name="gtb_sound">Włącz / wyłącz dźwięk</string>
+    <string name="gtb_zoom_in">Powiększ widok planszy</string>
+    <string name="gtb_zoom_out">Pomniejsz widok planszy</string>
+    
+    <string name="not_implemented">Jeszcze nie zaimplementowane ....</string>
+    
+    <string name="confirm_restart_game">Czy na pewno przerwać bieżącą grę?</string>
+    <string name="winner">%1$s wygrywa (ruchów: %2$d) !!!</string>
+    <string name="draw_title">Remis</string>
+    <string name="draw">Niesamowite, to remis!</string>       
+    <string name="winner_title">%1$s wygrywa</string>
+    <string name="please_wait">Proszę czekać ....</string>
+    <string name="cancel_btn">Anuluj</string>
+    <string name="game_interrupted">Gra została przerwana!</string>
+    <string name="game_started">Zaczynamy grę!</string>
+    
+    <string name="white">białe</string>
+    <string name="black">czarne</string>
+    
+</resources>
+    
+    
