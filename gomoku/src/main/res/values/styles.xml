@@ -16,10 +16,7 @@
     <style name="AppTheme" parent="AppBaseTheme">        
         
     </style>
-    
-    <style name="SpinnerStyle" parent="AppBaseTheme">        
-        <item name="selectableItemBackground">@drawable/spinner_bg</item>
-    </style>    
+
 
     <style name="MenuFont">
         <item name="android:textSize">25sp</item>

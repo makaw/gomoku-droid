@@ -7,7 +7,6 @@ package pl.net.kaw.gomoku_droid.activities.gui;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -211,10 +210,7 @@ public class BoardGraphics extends View {
     paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     paint.setColor(Color.parseColor("#3A3A3A"));
     paint.setStyle(Style.FILL); 
-    paint.setStrokeWidth(2.5f); 
-    
-    float ts = 50.0f * zoomFactor;
-    paint.setTextSize(Math.max(ts, 12.0f));
+    paint.setStrokeWidth(2.5f);
 
     pxField = (int)Math.round(piecePx * 1.5f);
 
@@ -307,6 +303,8 @@ public class BoardGraphics extends View {
 	super.onDraw(canvas);
 
 	Point coordsDn = getCanvasCoords(colsAndRows - 1, 0);
+    float ts = 50.0f * zoomFactor;
+    paint.setTextSize(Math.max(ts, 32.0f));
 
     // rysowanie planszy (siatka i podpisy)
     for (int i=0; i<colsAndRows; i++) {
@@ -316,9 +314,9 @@ public class BoardGraphics extends View {
       canvas.drawLine(coords.x, pxBoardMargin.y, coords.x, pxBoardSizeDecY, paint);
 
       canvas.drawText(BoardField.getLabA(i), coords.x - 3,
-    		  pxBoardSizeDecY + (zoomFactor <= 0.6 ? 7 : 10) + Math.round((float)pxField/2), paint);
+    		  pxBoardSizeDecY + (zoomFactor <= 0.6 ? 8 : 0) + Math.round((float)pxField/2), paint);
 
-      canvas.drawText(BoardField.getLabA(i), coords.x - 3, 14, paint);
+      canvas.drawText(BoardField.getLabA(i), coords.x - 3, 24 + (zoomFactor <= 0.6 ? -4 : 0), paint);
 
       canvas.drawLine(pxBoardMargin.x + 12, coords.y, coordsDn.x, coords.y, paint);
 

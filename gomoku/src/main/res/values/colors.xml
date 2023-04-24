@@ -10,8 +10,8 @@
     <color name="bg_progress">#eee</color>
     <color name="bg_modal">#555</color>
     <color name="std_text">#333</color>
-	<color name="spinner_item">#333</color>
-	<color name="spinner_dropdown_item_bg">#efefef</color>
-	<color name="spinner_dropdown_item_bg_pressed">#ccc</color>
+    <color name="spinner_dditem_text">#333</color>
+    <color name="spinner_item_text">#777</color>
+    <color name="spinner_dditem_bg">#aaeaeaea</color>
 	
 </resources>

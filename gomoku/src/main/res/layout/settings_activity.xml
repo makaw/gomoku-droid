@@ -35,77 +35,98 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2" >
+                android:weightSum="2.3" >
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
+                    android:layout_weight="1"
                     android:text="@string/st_board_size"
                     android:textColor="@color/std_text"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
-                 <!-- 
-    		       Crash w Android 7: android:dropDownSelector="@drawable/spinner_bg"
-    		       przeniesione do values/styles
-	         	 -->
                 <Spinner
                     android:id="@+id/st_board_size"
+                    style="@style/Widget.AppCompat.Spinner"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:textSize="14sp" 
-                    android:spinnerMode="dropdown"
-                    style="SpinnerStyle" />
+                    android:layout_height="?attr/dropdownListPreferredItemHeight"
+                    android:layout_weight="1.3"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/spinner_bg"
+                    android:dropDownWidth="250dp"
+                    android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
+                    android:paddingRight="14dp"
+                    android:popupBackground="@android:color/white"
+                    android:popupElevation="3dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2" >
+                android:weightSum="2.3" >
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
+                    android:layout_weight="1"
                     android:text="@string/st_win_condition"
                     android:textColor="@color/std_text"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/st_win_condition"
+                    style="@style/Widget.AppCompat.Spinner"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:textSize="14sp" 
-                    android:spinnerMode="dropdown" 
-                    style="SpinnerStyle" />
+                    android:layout_height="?attr/dropdownListPreferredItemHeight"
+                    android:layout_weight="1.3"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/spinner_bg"
+                    android:dropDownWidth="250dp"
+                    android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
+                    android:paddingRight="14dp"
+                    android:popupBackground="@android:color/white"
+                    android:popupElevation="3dp"  />
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
                 android:orientation="horizontal"
-                android:weightSum="2" >
+                android:weightSum="2.3" >
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.6"
+                    android:layout_weight="1"
                     android:text="@string/st_language"
                     android:textColor="@color/std_text"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <Spinner
                     android:id="@+id/st_language"
+                    style="@style/Widget.AppCompat.Spinner"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.4"
-                    android:textSize="14sp" 
-                    android:spinnerMode="dropdown" 
-                    style="SpinnerStyle" />
+                    android:layout_height="?attr/dropdownListPreferredItemHeight"
+                    android:layout_weight="1.3"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/spinner_bg"
+                    android:dropDownWidth="250dp"
+                    android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
+                    android:paddingRight="14dp"
+                    android:popupBackground="@android:color/white"
+                    android:popupElevation="3dp"  />
             </LinearLayout>
             
             
@@ -118,7 +139,7 @@
                 android:checked="false"
                 android:text="@string/st_computer_starts"
                 android:textColor="@color/std_text"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
             
             <CheckBox
                 android:id="@+id/st_sounds_enabled"
@@ -128,7 +149,7 @@
                 android:checked="false"
                 android:text="@string/st_sounds_enabled"
                 android:textColor="@color/std_text"
-                android:textSize="14sp" />            
+                android:textSize="16sp" />
             
         </LinearLayout>
 
